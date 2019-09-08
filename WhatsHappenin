@@ -1,0 +1,11 @@
+Elikkäs 2D tasohyppely. Mahdollisesti kuulaa juokseen siihen mukaan.
+
+Juuso:
+Ainaski renderöinti ja arkkitehtipuoli
+
+Halti:
+Etenkin Juuson määrittelemien palasten tekeminen. Tulossa ainaski
+pelikello
+hitboxit
+collision detection
+nyt on painovoima, mitä muuta fysiikkaa tarvitaan?
