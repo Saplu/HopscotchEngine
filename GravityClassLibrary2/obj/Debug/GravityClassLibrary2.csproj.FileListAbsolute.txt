@@ -1,0 +1,6 @@
+C:\Users\Halti\source\repos\BulletClassLibrary\GravityClassLibrary2\bin\Debug\GravityClassLibrary2.dll
+C:\Users\Halti\source\repos\BulletClassLibrary\GravityClassLibrary2\bin\Debug\GravityClassLibrary2.pdb
+C:\Users\Halti\source\repos\BulletClassLibrary\GravityClassLibrary2\obj\Debug\GravityClassLibrary2.csprojAssemblyReference.cache
+C:\Users\Halti\source\repos\BulletClassLibrary\GravityClassLibrary2\obj\Debug\GravityClassLibrary2.csproj.CoreCompileInputs.cache
+C:\Users\Halti\source\repos\BulletClassLibrary\GravityClassLibrary2\obj\Debug\GravityClassLibrary2.dll
+C:\Users\Halti\source\repos\BulletClassLibrary\GravityClassLibrary2\obj\Debug\GravityClassLibrary2.pdb

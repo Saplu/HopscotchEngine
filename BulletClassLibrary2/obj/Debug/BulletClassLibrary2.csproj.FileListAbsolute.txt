@@ -1,0 +1,9 @@
+C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\obj\Debug\BulletClassLibrary2.csprojAssemblyReference.cache
+C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\obj\Debug\BulletClassLibrary2.csproj.CoreCompileInputs.cache
+C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\bin\Debug\BulletClassLibrary2.dll
+C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\bin\Debug\BulletClassLibrary2.pdb
+C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\bin\Debug\GravityClassLibrary2.dll
+C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\bin\Debug\GravityClassLibrary2.pdb
+C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\obj\Debug\BulletClassLibrary2.csproj.CopyComplete
+C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\obj\Debug\BulletClassLibrary2.dll
+C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\obj\Debug\BulletClassLibrary2.pdb
