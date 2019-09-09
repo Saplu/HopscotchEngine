@@ -8,6 +8,9 @@ namespace BulletClassLibrary
     {
         int height, width;
         public Point topL, topR, midTopR, midBotR, midTopL, midBotL, botL, botR, position;
+        List<Point> corners;
+
+        public List<Point> Corners { get => corners; set => corners = value; }
 
         public Hitbox(int height, int width, Point position)
         {
@@ -20,6 +23,7 @@ namespace BulletClassLibrary
             midBotL = new Point(position.X - Convert.ToInt32(width / 2), position.Y + Convert.ToInt32(height / 4));
             botL = new Point(position.X - Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
             botR = new Point(position.X + Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
+            corners = new List<Point>() { topL, topR, midTopL, midTopR, midBotL, midBotR, botL, botR };
         }
 
         public bool Hit(Point point)
@@ -30,6 +34,18 @@ namespace BulletClassLibrary
             if (pointInTriangle(point, corners[0], corners[1], corners[2]))
                 return false;
             return true;
+        }
+
+        public bool Hit(Hitbox box)
+        {
+            if (box.midBotL.X > midBotR.X || box.midBotR.X < midBotL.X || box.topL.Y > botL.Y || box.botL.Y < topL.Y)
+                return false;
+            foreach(var point in box.Corners)
+            {
+                if (Hit(point))
+                    return true;
+            }
+            return false;
         }
 
         private List<Point> checkCorner(Point point)
@@ -52,8 +68,8 @@ namespace BulletClassLibrary
             second = sign(check, corner2, corner3);
             third = sign(check, corner3, corner1);
 
-            hasNeg = (first < 0) || (second < 0) || (third < 0);
-            hasPos = (first > 0) || (second > 0) || (third > 0);
+            hasNeg = (first <= 0) || (second <= 0) || (third <= 0);
+            hasPos = (first >= 0) || (second >= 0) || (third >= 0);
 
             return !(hasNeg && hasPos);
         }

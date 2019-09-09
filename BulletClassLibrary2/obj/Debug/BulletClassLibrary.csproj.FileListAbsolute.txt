@@ -7,3 +7,12 @@ C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\obj\Debug\Bul
 C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\obj\Debug\BulletClassLibrary2.dll
 C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\obj\Debug\BulletClassLibrary2.pdb
 C:\Users\Halti\source\repos\BulletClassLibrary\BulletClassLibrary2\obj\Debug\BulletClassLibrary.csprojAssemblyReference.cache
+C:\Users\Halti\source\repos\HopscotchEngine\BulletClassLibrary2\bin\Debug\BulletClassLibrary2.dll
+C:\Users\Halti\source\repos\HopscotchEngine\BulletClassLibrary2\bin\Debug\BulletClassLibrary2.pdb
+C:\Users\Halti\source\repos\HopscotchEngine\BulletClassLibrary2\bin\Debug\GravityClassLibrary2.dll
+C:\Users\Halti\source\repos\HopscotchEngine\BulletClassLibrary2\bin\Debug\GravityClassLibrary2.pdb
+C:\Users\Halti\source\repos\HopscotchEngine\BulletClassLibrary2\obj\Debug\BulletClassLibrary.csprojAssemblyReference.cache
+C:\Users\Halti\source\repos\HopscotchEngine\BulletClassLibrary2\obj\Debug\BulletClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Halti\source\repos\HopscotchEngine\BulletClassLibrary2\obj\Debug\BulletClassLibrary.csproj.CopyComplete
+C:\Users\Halti\source\repos\HopscotchEngine\BulletClassLibrary2\obj\Debug\BulletClassLibrary2.dll
+C:\Users\Halti\source\repos\HopscotchEngine\BulletClassLibrary2\obj\Debug\BulletClassLibrary2.pdb
