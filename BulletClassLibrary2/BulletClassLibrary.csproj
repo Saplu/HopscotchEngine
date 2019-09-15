@@ -7,8 +7,8 @@
     <ProjectGuid>{0608C0E9-1E53-41CE-976D-F74A64B77CD9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BulletClassLibrary2</RootNamespace>
-    <AssemblyName>BulletClassLibrary2</AssemblyName>
+    <RootNamespace>BulletClassLibrary</RootNamespace>
+    <AssemblyName>BulletClassLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,9 +43,13 @@
   <ItemGroup>
     <Compile Include="Bullet.cs" />
     <Compile Include="Hitbox.cs" />
+    <Compile Include="IHitbox.cs" />
     <Compile Include="IVelocity.cs" />
+    <Compile Include="Octagon.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rectangle.cs" />
+    <Compile Include="RectangleHitbox.cs" />
     <Compile Include="Velocity.cs" />
   </ItemGroup>
   <ItemGroup>
