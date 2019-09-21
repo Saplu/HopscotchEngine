@@ -17,10 +17,8 @@ namespace BulletClassLibrary
         {
             if (point.Y < box.TopL.Y || point.Y > box.BotL.Y || point.X < box.MidTopL.X || point.X > box.MidTopR.X)
                 return false;
-            var corners = checkCorner(point);
-            if (pointInTriangle(point, corners[0], corners[1], corners[2]))
-                return false;
-            return true;
+            var corner = checkCorner(point);
+            return !box.VirtualCorners[corner].Contains(point);
         }
 
         public bool Hit(Hitbox box)
@@ -33,6 +31,11 @@ namespace BulletClassLibrary
                 if (Hit(point))
                     return true;
             }
+            foreach(var point in this.box.Corners)
+            {
+                if (box.Hit(point))
+                    return true;
+            }
             return false;
         }
 
@@ -41,35 +44,15 @@ namespace BulletClassLibrary
             return false;
         }
 
-        private List<Point> checkCorner(Point point)
+        private int checkCorner(Point point)
         {
-            if (point.X > box.Position.X && point.Y < box.Position.Y)
-                return new List<Point> { new Point(box.MidTopR.X, box.TopR.Y), box.TopR, box.MidTopR };
-            if (point.X > box.Position.X && point.Y > box.Position.Y)
-                return new List<Point>() { new Point(box.MidTopR.X, box.BotR.Y), box.BotR, box.MidBotR };
+            if (point.X >= box.Position.X && point.Y <= box.Position.Y)
+                return 0;
+            if (point.X >= box.Position.X && point.Y >= box.Position.Y)
+                return 1;
             if (point.X < box.Position.X && point.Y > box.Position.Y)
-                return new List<Point>() { new Point(box.MidBotL.X, box.BotR.Y), box.BotL, box.MidBotL };
-            return new List<Point>() { new Point(box.MidBotL.X, box.TopR.Y), box.TopL, box.MidTopL };
-        }
-
-        private bool pointInTriangle(Point check, Point corner1, Point corner2, Point corner3)
-        {
-            double first, second, third;
-            bool hasNeg, hasPos;
-
-            first = sign(check, corner1, corner2);
-            second = sign(check, corner2, corner3);
-            third = sign(check, corner3, corner1);
-
-            hasNeg = (first <= 0) || (second <= 0) || (third <= 0);
-            hasPos = (first >= 0) || (second >= 0) || (third >= 0);
-
-            return !(hasNeg && hasPos);
-        }
-
-        private double sign(Point check, Point corner1, Point corner2)
-        {
-            return (check.X - corner2.X) * (corner1.Y - corner2.Y) - (corner1.X - corner2.X) * (check.Y - corner2.Y);
+                return 2;
+            return 3;
         }
     }
 }

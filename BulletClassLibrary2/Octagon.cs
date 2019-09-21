@@ -11,6 +11,7 @@ namespace BulletClassLibrary
         int height, width;
         Point topL, topR, midTopR, midBotR, midTopL, midBotL, botL, botR, position;
         List<Point> corners;
+        List<Triangle> virtualCorners;
 
         public int Height { get => height; set => height = value; }
         public int Width { get => width; set => width = value; }
@@ -24,6 +25,7 @@ namespace BulletClassLibrary
         public Point BotR { get => botR; set => botR = value; }
         public Point Position { get => position; set => position = value; }
         public List<Point> Corners { get => corners; set => corners = value; }
+        public List<Triangle> VirtualCorners { get => virtualCorners; set => virtualCorners = value; }
 
         public Octagon(int height, int width, Point position)
         {
@@ -37,6 +39,10 @@ namespace BulletClassLibrary
             botL = new Point(position.X - Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
             botR = new Point(position.X + Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
             corners = new List<Point>() { topL, topR, midTopL, midTopR, midBotL, midBotR, botL, botR };
+            virtualCorners = new List<Triangle>() { new Triangle(topR, new Point(midTopR.X, topR.Y), midTopR),
+            new Triangle(midBotR, new Point(midBotR.X, botR.Y), botR),
+            new Triangle(botL, new Point(midBotL.X, botL.Y), midBotL),
+            new Triangle(midTopL, new Point(midTopL.X, topL.Y), topL)};
         }
     }
 }
