@@ -10,7 +10,7 @@ namespace BulletClassLibrary
     {
         List<Point> corners;
 
-        public List<Point> Corners { get => corners; set => corners = value; }
+        public List<Point> Corners { get => corners; set => corners = checkValue(value); }
 
         public Triangle(Point c1, Point c2, Point c3)
         {
@@ -39,6 +39,13 @@ namespace BulletClassLibrary
         private double sign(Point check, Point corner1, Point corner2)
         {
             return (check.X - corner2.X) * (corner1.Y - corner2.Y) - (corner1.X - corner2.X) * (check.Y - corner2.Y);
+        }
+
+        private List<Point> checkValue(List<Point> value)
+        {
+            if (value.Count != 3 || value[0] == value[1] || value[1] == value[2] || value[2] == value[0])
+                throw new ArgumentOutOfRangeException("TRIangle contains exactly THREE corners.");
+            return value;
         }
     }
 }

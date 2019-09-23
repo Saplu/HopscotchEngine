@@ -13,19 +13,11 @@ namespace BulletClassLibrary
         List<Point> corners;
         List<Triangle> virtualCorners;
 
-        public int Height { get => height; set => height = value; }
-        public int Width { get => width; set => width = value; }
-        public Point TopL { get => topL; set => topL = value; }
-        public Point TopR { get => topR; set => topR = value; }
-        public Point MidTopR { get => midTopR; set => midTopR = value; }
-        public Point MidBotR { get => midBotR; set => midBotR = value; }
-        public Point MidTopL { get => midTopL; set => midTopL = value; }
-        public Point MidBotL { get => midBotL; set => midBotL = value; }
-        public Point BotL { get => botL; set => botL = value; }
-        public Point BotR { get => botR; set => botR = value; }
-        public Point Position { get => position; set => position = value; }
-        public List<Point> Corners { get => corners; set => corners = value; }
-        public List<Triangle> VirtualCorners { get => virtualCorners; set => virtualCorners = value; }
+        public int Height { get => height; set => height = setHeight(value); }
+        public int Width { get => width; set => width = setWidth(value); }
+        public Point Position { get => position; set => position = changePosition(value); }
+        public List<Point> Corners { get => corners; }
+        public List<Triangle> VirtualCorners { get => virtualCorners; }
 
         public Octagon(int height, int width, Point position)
         {
@@ -38,11 +30,55 @@ namespace BulletClassLibrary
             midBotL = new Point(position.X - Convert.ToInt32(width / 2), position.Y + Convert.ToInt32(height / 4));
             botL = new Point(position.X - Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
             botR = new Point(position.X + Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
-            corners = new List<Point>() { topL, topR, midTopL, midTopR, midBotL, midBotR, botL, botR };
+            corners = new List<Point>() { topL, topR, midTopR, midBotR, botR, botL, midBotL, midTopL};
             virtualCorners = new List<Triangle>() { new Triangle(topR, new Point(midTopR.X, topR.Y), midTopR),
             new Triangle(midBotR, new Point(midBotR.X, botR.Y), botR),
             new Triangle(botL, new Point(midBotL.X, botL.Y), midBotL),
             new Triangle(midTopL, new Point(midTopL.X, topL.Y), topL)};
+        }
+
+        private Point changePosition(Point value)
+        {
+            foreach(var point in corners)
+            {
+                point.X += value.X - position.X;
+                point.Y += value.Y - position.Y;
+            }
+            foreach(var triangle in virtualCorners)
+            {
+                foreach(var corner in triangle.Corners)
+                {
+                    corner.X += value.X - corner.X;
+                    corner.Y += value.Y - corner.Y;
+                }
+            }
+            return value;
+        }
+
+        private int setHeight(int value)
+        {
+            corners[0].Y = position.Y - Convert.ToInt32(value / 2);
+            corners[1].Y = position.Y - Convert.ToInt32(value / 2);
+            corners[2].Y = position.Y - Convert.ToInt32(value / 4);
+            corners[3].Y = position.Y + Convert.ToInt32(value / 4);
+            corners[4].Y = position.Y + Convert.ToInt32(value / 2);
+            corners[5].Y = position.Y + Convert.ToInt32(value / 2);
+            corners[6].Y = position.Y + Convert.ToInt32(value / 4);
+            corners[7].Y = position.Y - Convert.ToInt32(value / 4);
+            return value;
+        }
+
+        private int setWidth(int value)
+        {
+            corners[0].X = position.X - Convert.ToInt32(value / 4);
+            corners[1].X = position.X + Convert.ToInt32(value / 4);
+            corners[2].X = position.X + Convert.ToInt32(value / 2);
+            corners[3].X = position.X + Convert.ToInt32(value / 2);
+            corners[4].X = position.X + Convert.ToInt32(value / 4);
+            corners[5].X = position.X - Convert.ToInt32(value / 4);
+            corners[6].X = position.X - Convert.ToInt32(value / 2);
+            corners[7].X = position.X - Convert.ToInt32(value / 2);
+            return value;
         }
     }
 }
