@@ -26,6 +26,14 @@ namespace BulletClassLibrary
             new Point(position.X, position.Y + height), new Point(position.X + width, position.Y + height)};
         }
 
+        public override bool Equals(object obj)
+        {
+            var toCompareWith = obj as Rectangle;
+            if (toCompareWith == null)
+                return false;
+            return corners.SequenceEqual(toCompareWith.corners);
+        }
+
         private Point changePosition(Point value)
         {
             corners = new List<Point>() { new Point(value.X, value.Y), new Point(value.X + width, value.Y),

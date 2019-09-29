@@ -9,12 +9,12 @@ namespace BulletTests
     public class UnitTest2
     {
         
-        Hitbox hitbox = new Hitbox(100, 100, new Point(150, 150));
+        Hitbox hitbox = new Hitbox(100, 100, new Point(100, 100));
 
         [TestMethod]
         public void TestMethod1()
         {
-            Point point = new Point(60, 52);
+            Point point = new Point(100, 100);
 
             bool actual = hitbox.Hit(point);
 
@@ -25,7 +25,7 @@ namespace BulletTests
         [TestMethod]
         public void TestMethod2()
         {
-            Hitbox testbox = new Hitbox(20, 20, new Point(180, 130));
+            Hitbox testbox = new Hitbox(20, 20, new Point(150, 60));
 
             bool actual = hitbox.Hit(testbox);
 

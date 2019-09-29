@@ -37,20 +37,28 @@ namespace BulletClassLibrary
             new Triangle(midTopL, new Point(midTopL.X, topL.Y), topL)};
         }
 
+        public override bool Equals(object obj)
+        {
+            var toCompareWith = obj as Octagon;
+            if (toCompareWith == null)
+                return false;
+            return corners.SequenceEqual(toCompareWith.corners);
+        }
+
         private Point changePosition(Point value)
         {
+            value = checkValue(value);
+            var moveX = value.X - position.X;
+            var moveY = value.Y - position.Y;
             foreach(var point in corners)
             {
-                point.X += value.X - position.X;
-                point.Y += value.Y - position.Y;
+                point.X += moveX;
+                point.Y += moveY;
             }
             foreach(var triangle in virtualCorners)
             {
-                foreach(var corner in triangle.Corners)
-                {
-                    corner.X += value.X - corner.X;
-                    corner.Y += value.Y - corner.Y;
-                }
+                triangle.Corners[1].X += moveX;
+                triangle.Corners[1].Y += moveY;
             }
             return value;
         }
@@ -78,6 +86,15 @@ namespace BulletClassLibrary
             corners[5].X = position.X - Convert.ToInt32(value / 4);
             corners[6].X = position.X - Convert.ToInt32(value / 2);
             corners[7].X = position.X - Convert.ToInt32(value / 2);
+            return value;
+        }
+
+        private Point checkValue(Point value)
+        {
+            if (value.X < width / 2)
+                value.X = Convert.ToInt32(width / 2);
+            if (value.Y < height / 2)
+                value.Y = Convert.ToInt32(height / 2);
             return value;
         }
     }
