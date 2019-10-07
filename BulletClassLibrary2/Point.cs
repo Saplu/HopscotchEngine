@@ -8,13 +8,13 @@ namespace BulletClassLibrary
     {
         int x, y;
 
-        public int X { get => x; set => x = checkValue(value); }
-        public int Y { get => y; set => y = checkValue(value); }
+        public int X { get => x; set => x = value; }
+        public int Y { get => y; set => y = value; }
 
         public Point(int X, int Y)
         {
-            x = checkValue(X);
-            y = checkValue(Y);
+            x = X;
+            y = Y;
         }
 
         public override bool Equals(object obj)
