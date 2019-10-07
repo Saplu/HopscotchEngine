@@ -8,15 +8,19 @@ namespace BulletClassLibrary
 {
     public class Rectangle
     {
-        int width, height, angle;
+        int width, height, angle, maxX, maxY, minX, minY;
         Point position;
         List<Point> corners;
 
-        public int Width { get => width; set => width = setWidth(value); }
-        public int Height { get => height; set => height = setHeight(value); }
+        public int Width { get => width; set => setWidth(value); }
+        public int Height { get => height; set => setHeight(value); }
         public Point Position { get => position; set => position = changePosition(value); }
         public List<Point> Corners { get => corners; }
         public int Angle { get => angle; set => angle = setAngle(value); }
+        public int MaxX { get => maxX; set => maxX = value; }
+        public int MaxY { get => maxY; set => maxY = value; }
+        public int MinX { get => minX; set => minX = value; }
+        public int MinY { get => minY; set => minY = value; }
 
         public Rectangle(int width, int height, Point position)
         {
@@ -25,6 +29,7 @@ namespace BulletClassLibrary
             this.position = position;
             angle = 0;
             corners = calculateCorners(angle);
+            setMaxMinValues();
         }
 
         public Rectangle(int width, int height, Point position, int angle)
@@ -34,6 +39,7 @@ namespace BulletClassLibrary
             this.position = position;
             this.angle = angle;
             corners = calculateCorners(angle);
+            setMaxMinValues();
         }
 
         public override bool Equals(object obj)
@@ -47,23 +53,23 @@ namespace BulletClassLibrary
         private Point changePosition(Point value)
         {
             value = checkValue(value);
-            corners = new List<Point>() { new Point(value.X, value.Y), new Point(value.X + width, value.Y),
-            new Point(value.X, value.Y + height), new Point(value.X + width, value.Y + height)};
+            corners = calculateCorners(angle);
+            setMaxMinValues();
             return value;
         }
 
-        private int setWidth(int value)
+        private void setWidth(int value)
         {
-            corners[1].X = position.X + value;
-            corners[3].X = position.X + value;
-            return value;
+            width = value;
+            corners = calculateCorners(angle);
+            setMaxMinValues();            
         }
 
-        private int setHeight(int value)
+        private void setHeight(int value)
         {
-            corners[2].Y = position.Y + value;
-            corners[3].Y = position.Y + value;
-            return value;
+            height = value;
+            corners = calculateCorners(angle);
+            setMaxMinValues();
         }
 
         private int setAngle(int value)
@@ -112,6 +118,39 @@ namespace BulletClassLibrary
             if (value.Y < height / 2)
                 value.Y = Convert.ToInt32(height / 2);
             return value;
+        }
+
+        private void setMaxMinValues()
+        {
+            var values = getBorderValues();
+            maxX = values[0];
+            maxY = values[1];
+            minX = values[2];
+            minY = values[3];
+        }
+
+
+        private List<int> getBorderValues()
+        {
+            List<int> xValues = getCornerValues(true);
+            List<int> yValues = getCornerValues(false);
+            var list = new List<int>();
+            list.Add(xValues.Max());
+            list.Add(yValues.Max());
+            list.Add(xValues.Min());
+            list.Add(yValues.Min());
+            return list;
+        }
+
+        private List<int> getCornerValues(bool isX)
+        {
+            var values = new List<int>();
+            if (isX)
+                foreach (var item in corners)
+                    values.Add(item.X);
+            else foreach (var item in corners)
+                    values.Add(item.Y);
+            return values;
         }
     }
 }

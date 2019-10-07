@@ -10,9 +10,9 @@ namespace BulletClassLibrary
     {
         Rectangle box;
 
-        public RectangleHitbox(int height, int width, Point position)
+        public RectangleHitbox(int height, int width, Point position, int angle)
         {
-            box = new Rectangle(width, height, position);
+            box = new Rectangle(width, height, position, angle);
         }
 
         public bool Hit(Point point)
@@ -34,10 +34,18 @@ namespace BulletClassLibrary
 
         private bool isInside(Point point)
         {
-            if (point.X >= box.Position.X && point.X <= (box.Position.X + box.Width) &&
-                point.Y >= box.Position.Y && point.Y <= (box.Position.Y + box.Height))
-                return true;
-            else return false;
+            if (box.Angle != 0)
+            {
+                if (broadCheck(point))
+                {
+                    var triangles = new List<Triangle>() { new Triangle(box.Corners[0], box.Corners[1], box.Corners[2]),
+                    new Triangle(box.Corners[2], box.Corners[3], box.Corners[0])};
+                    if (triangles[0].Contains(point) || triangles[1].Contains(point))
+                        return true;
+                    return false;
+                }
+            }
+            return broadCheck(point);
         }
 
         private bool sameSizeCheck(RectangleHitbox hitbox)
@@ -87,6 +95,37 @@ namespace BulletClassLibrary
                     sides[i][0].Y >= box.Position.Y && sides[i][1].Y <= box.Position.Y + box.Height)
                     return true;
             }
+            return false;
+        }
+
+        private List<int> getBorderValues(Rectangle box)
+        {
+            List<int> xValues = getCornerValues(box.Corners, true);
+            List<int> yValues = getCornerValues(box.Corners, false);
+            var list = new List<int>();
+            list.Add(xValues.Max());
+            list.Add(yValues.Max());
+            list.Add(xValues.Min());
+            list.Add(yValues.Min());
+            return list;
+        }
+
+        private List<int> getCornerValues(List<Point> corners, bool isX)
+        {
+            var values = new List<int>();
+            if (isX)
+                foreach (var item in corners)
+                    values.Add(item.X);
+            else foreach (var item in corners)
+                    values.Add(item.Y);
+            return values;
+        }
+
+        private bool broadCheck(Point point)
+        {
+            if (point.X >= box.MinX && point.X <= box.MaxX &&
+                point.Y >= box.MinY && point.Y <= (box.MaxY))
+                return true;
             return false;
         }
     }

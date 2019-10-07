@@ -7,13 +7,13 @@ namespace BulletTests
     [TestClass]
     public class UnitTest5
     {
-        Rectangle r = new Rectangle(100, 100, new Point(100, 100), 30);
+        RectangleHitbox box = new RectangleHitbox(100, 100, new Point(100, 100), 17);
 
         [TestMethod]
         public void TestMethod1()
         {
-            Point expected = new Point(70, 70);
-            Point actual = r.Corners[0];
+            bool expected = false;
+            bool actual = box.Hit(new Point(140, 60));
             Assert.AreEqual(expected, actual);
         }
     }
