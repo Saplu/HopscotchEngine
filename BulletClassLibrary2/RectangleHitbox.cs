@@ -10,6 +10,8 @@ namespace BulletClassLibrary
     {
         Rectangle box;
 
+        public Rectangle Box { get => box; }
+
         public RectangleHitbox(int height, int width, Point position, int angle)
         {
             box = new Rectangle(width, height, position, angle);
@@ -22,14 +24,26 @@ namespace BulletClassLibrary
 
         public bool Hit(Hitbox hitbox)
         {
-            return false;
+            if (CheckHitbox(hitbox.Box))
+                return true;
+            else return hitbox.CheckHitbox(this.box);
         }
 
         public bool Hit(RectangleHitbox hitbox)
         {
-            if (hitbox.box.Width == box.Width && hitbox.box.Height == box.Height)
-                return sameSizeCheck(hitbox);
-            else  return allSizeCheck(hitbox);
+            if (CheckHitbox(hitbox.box))
+                return true;
+            else return hitbox.CheckHitbox(this.box);
+        }
+
+        public bool CheckHitbox(IShape hitbox)
+        {
+            foreach (var point in hitbox.Corners)
+            {
+                if (isInside(point))
+                    return true;
+            }
+            return false;
         }
 
         private bool isInside(Point point)
@@ -46,32 +60,6 @@ namespace BulletClassLibrary
                 }
             }
             return broadCheck(point);
-        }
-
-        private bool sameSizeCheck(RectangleHitbox hitbox)
-        {
-            foreach(var point in hitbox.box.Corners)
-            {
-                if (isInside(point))
-                    return true;
-            }
-            return false;
-        }
-
-        private bool allSizeCheck(RectangleHitbox hitbox)
-        {
-            var sides = getsides(hitbox);
-            for(int i = 0; i < 2; i++)
-            {
-                if (sides[i][0].X <= box.Position.X && sides[i][1].X >= box.Position.X ||
-                    sides[i][1].X >= box.Position.X + box.Width && sides[i][0].X <= box.Position.X + box.Width ||
-                    sides[i][0].X >= box.Position.X && sides[i][1].X <= box.Position.X + box.Width)
-                {
-                    if (checkY(sides))
-                        return true;
-                }
-            }
-            return false;
         }
 
         private Point[][] getsides(RectangleHitbox hitbox)

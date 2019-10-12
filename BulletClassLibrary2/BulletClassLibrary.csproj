@@ -44,6 +44,7 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="Hitbox.cs" />
     <Compile Include="IHitbox.cs" />
+    <Compile Include="IShape.cs" />
     <Compile Include="IVelocity.cs" />
     <Compile Include="Octagon.cs" />
     <Compile Include="Point.cs" />

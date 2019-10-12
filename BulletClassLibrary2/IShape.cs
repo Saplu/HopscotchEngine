@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace BulletClassLibrary
 {
-    interface IHitbox
+    public interface IShape
     {
-        bool Hit(Point point);
-        bool Hit(Hitbox box);
-        bool Hit(RectangleHitbox box);
-        bool CheckHitbox(IShape box);
+        List<Point> Corners { get; }
     }
 }

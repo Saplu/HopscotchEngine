@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BulletClassLibrary
 {
-    public class Rectangle
+    public class Rectangle : IShape
     {
         int width, height, angle, maxX, maxY, minX, minY;
         Point position;
@@ -17,10 +17,10 @@ namespace BulletClassLibrary
         public Point Position { get => position; set => position = changePosition(value); }
         public List<Point> Corners { get => corners; }
         public int Angle { get => angle; set => angle = setAngle(value); }
-        public int MaxX { get => maxX; set => maxX = value; }
-        public int MaxY { get => maxY; set => maxY = value; }
-        public int MinX { get => minX; set => minX = value; }
-        public int MinY { get => minY; set => minY = value; }
+        public int MaxX { get => maxX; }
+        public int MaxY { get => maxY; }
+        public int MinX { get => minX; }
+        public int MinY { get => minY; }
 
         public Rectangle(int width, int height, Point position)
         {

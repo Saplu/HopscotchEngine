@@ -4,9 +4,11 @@ using System.Text;
 
 namespace BulletClassLibrary
 {
-    public class Hitbox
+    public class Hitbox : IHitbox
     {
         Octagon box;
+
+        public Octagon Box { get => box; }
 
         public Hitbox(int height, int width, Point position)
         {
@@ -41,6 +43,18 @@ namespace BulletClassLibrary
 
         public bool Hit(RectangleHitbox box)
         {
+            if (CheckHitbox(box.Box))
+                return true;
+            else return box.CheckHitbox(this.box);
+        }
+
+        public bool CheckHitbox(IShape hitbox)
+        {
+            foreach (var point in hitbox.Corners)
+            {
+                if (Hit(point))
+                    return true;
+            }
             return false;
         }
 

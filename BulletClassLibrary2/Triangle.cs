@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BulletClassLibrary
 {
-    public class Triangle
+    public class Triangle : IShape
     {
         List<Point> corners;
 
