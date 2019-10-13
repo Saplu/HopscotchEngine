@@ -25,24 +25,19 @@ namespace BulletClassLibrary
 
         public bool Hit(Hitbox box)
         {
-            if (box.box.Corners[6].X > this.box.Corners[3].X || box.box.Corners[3].X < this.box.Corners[6].X || 
-                box.box.Corners[0].Y > this.box.Corners[5].Y || box.box.Corners[5].Y < this.box.Corners[0].Y)
+            if (!broadCheck(box.Box))
                 return false;
-            foreach(var point in box.box.Corners)
-            {
-                if (Hit(point))
-                    return true;
-            }
-            foreach(var point in this.box.Corners)
-            {
-                if (box.Hit(point))
-                    return true;
-            }
+            if (CheckHitbox(box.Box))
+                return true;
+            if (box.CheckHitbox(this.Box))
+                return true;
             return pierces(box);
         }
 
         public bool Hit(RectangleHitbox box)
         {
+            if (!broadCheck(box.Box))
+                return false;
             if (CheckHitbox(box.Box))
                 return true;
             else return box.CheckHitbox(this.box);
@@ -78,6 +73,14 @@ namespace BulletClassLibrary
                 this.box.Corners[1].Y > box.box.Corners[1].Y && this.box.Corners[4].Y < box.box.Corners[4].Y)
                 return true;
             return false;
+        }
+
+        private bool broadCheck(IShape shape)
+        {
+            if (shape.MinX > this.box.MaxX || shape.MaxX < this.box.MinX ||
+                shape.MaxY < this.box.MinY || shape.MinY > this.box.MaxY)
+                return false;
+            else return true;
         }
     }
 }

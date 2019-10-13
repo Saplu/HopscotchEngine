@@ -9,8 +9,13 @@ namespace BulletClassLibrary
     public class Triangle : IShape
     {
         List<Point> corners;
+        int maxX, minX, maxY, minY;
 
         public List<Point> Corners { get => corners; set => corners = checkValue(value); }
+        public int MaxX { get => maxX; }
+        public int MinX { get => minX; }
+        public int MaxY { get => maxY; }
+        public int MinY { get => minY; }
 
         public Triangle(Point c1, Point c2, Point c3)
         {
@@ -19,6 +24,7 @@ namespace BulletClassLibrary
                 corners = new List<Point>() { c1, c2, c3 };
             }
             else throw new Exception("Triangle must have three different corners.");
+            setMaxMinValues();
         }
 
         public bool Contains(Point point)
@@ -45,7 +51,27 @@ namespace BulletClassLibrary
         {
             if (value.Count != 3 || value[0] == value[1] || value[1] == value[2] || value[2] == value[0])
                 throw new ArgumentOutOfRangeException("TRIangle contains exactly THREE corners.");
+            setMaxMinValues();
             return value;
+        }
+
+        private void setMaxMinValues()
+        {
+            minX = int.MaxValue;
+            maxX = int.MinValue;
+            minY = int.MaxValue;
+            maxY = int.MinValue;
+            foreach(var corner in corners)
+            {
+                if (corner.X < minX)
+                    minX = corner.X;
+                if (corner.X > maxX)
+                    maxX = corner.X;
+                if (corner.Y < minY)
+                    minY = corner.Y;
+                if (corner.Y > maxY)
+                    maxY = corner.Y;
+            }
         }
     }
 }

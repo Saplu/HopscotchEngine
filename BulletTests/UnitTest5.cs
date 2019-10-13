@@ -8,6 +8,7 @@ namespace BulletTests
     public class UnitTest5
     {
         RectangleHitbox box = new RectangleHitbox(100, 100, new Point(100, 100), 5);
+        Hitbox box2 = new Hitbox(100, 100, new Point(100, 100));
 
         [TestMethod]
         public void TestMethod1()
@@ -29,18 +30,18 @@ namespace BulletTests
         [TestMethod]
         public void TestMethod3()
         {
-            var testBox = new Hitbox(200, 200, new Point(100, 251));
+            var testBox = new Hitbox(20, 2000, new Point(200, 140));
             bool expected = true;
-            bool actual = box.Hit(testBox);
+            bool actual = box2.Hit(testBox);
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestMethod4()
         {
-            var testBox = new Hitbox(200, 200, new Point(100, 251));
+            var testBox = new RectangleHitbox(200, 200, new Point(200, 100), 0);
             bool expected = true;
-            bool actual = testBox.Hit(box);
+            bool actual = box2.Hit(testBox);
             Assert.AreEqual(expected, actual);
         }
     }

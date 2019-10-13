@@ -24,6 +24,8 @@ namespace BulletClassLibrary
 
         public bool Hit(Hitbox hitbox)
         {
+            if (!broadCheck(hitbox.Box))
+                return false;
             if (CheckHitbox(hitbox.Box))
                 return true;
             else return hitbox.CheckHitbox(this.box);
@@ -31,9 +33,11 @@ namespace BulletClassLibrary
 
         public bool Hit(RectangleHitbox hitbox)
         {
+            if (!broadCheck(hitbox.Box))
+                return false;
             if (CheckHitbox(hitbox.box))
                 return true;
-            else return hitbox.CheckHitbox(this.box);
+            return hitbox.CheckHitbox(this.box);
         }
 
         public bool CheckHitbox(IShape hitbox)
@@ -115,6 +119,14 @@ namespace BulletClassLibrary
                 point.Y >= box.MinY && point.Y <= (box.MaxY))
                 return true;
             return false;
+        }
+
+        private bool broadCheck(IShape shape)
+        {
+            if (shape.MinX > this.box.MaxX || shape.MaxX < this.box.MinX ||
+                shape.MaxY < this.box.MinY || shape.MinY > this.box.MaxY)
+                return false;
+            else return true;
         }
     }
 }

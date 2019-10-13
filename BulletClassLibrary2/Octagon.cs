@@ -8,7 +8,7 @@ namespace BulletClassLibrary
 {
     public class Octagon : IShape
     {
-        int height, width;
+        int height, width, maxX, minX, maxY, minY;
         Point topL, topR, midTopR, midBotR, midTopL, midBotL, botL, botR, position;
         List<Point> corners;
         List<Triangle> virtualCorners;
@@ -18,6 +18,10 @@ namespace BulletClassLibrary
         public Point Position { get => position; set => position = changePosition(value); }
         public List<Point> Corners { get => corners; }
         public List<Triangle> VirtualCorners { get => virtualCorners; }
+        public int MaxX { get => maxX; }
+        public int MinX { get => minX; }
+        public int MaxY { get => maxY; }
+        public int MinY { get => minY; }
 
         public Octagon(int height, int width, Point position)
         {
@@ -31,6 +35,7 @@ namespace BulletClassLibrary
             botL = new Point(position.X - Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
             botR = new Point(position.X + Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
             corners = new List<Point>() { topL, topR, midTopR, midBotR, botR, botL, midBotL, midTopL};
+            setMaxMinValues();
             virtualCorners = new List<Triangle>() { new Triangle(topR, new Point(midTopR.X, topR.Y), midTopR),
             new Triangle(midBotR, new Point(midBotR.X, botR.Y), botR),
             new Triangle(botL, new Point(midBotL.X, botL.Y), midBotL),
@@ -60,6 +65,7 @@ namespace BulletClassLibrary
                 triangle.Corners[1].X += moveX;
                 triangle.Corners[1].Y += moveY;
             }
+            setMaxMinValues();
             return value;
         }
 
@@ -96,6 +102,14 @@ namespace BulletClassLibrary
             if (value.Y < height / 2)
                 value.Y = Convert.ToInt32(height / 2);
             return value;
+        }
+
+        private void setMaxMinValues()
+        {
+            maxX = midTopR.X;
+            minX = midTopL.X;
+            maxY = botR.Y;
+            minY = topR.Y;
         }
     }
 }
