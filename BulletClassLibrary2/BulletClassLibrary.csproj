@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bullet.cs" />
+    <Compile Include="GameTime.cs" />
     <Compile Include="Hitbox.cs" />
     <Compile Include="IHitbox.cs" />
     <Compile Include="IShape.cs" />

@@ -6,10 +6,10 @@ namespace BulletClassLibrary
 {
     public class Point
     {
-        int x, y;
+        double x, y;
 
-        public int X { get => x; set => x = value; }
-        public int Y { get => y; set => y = value; }
+        public int X { get => Convert.ToInt32(x); set => x = value; }
+        public int Y { get => Convert.ToInt32(y); set => y = value; }
 
         public Point(int X, int Y)
         {
@@ -25,11 +25,10 @@ namespace BulletClassLibrary
             return this.x == toCompareWith.x && this.y == toCompareWith.y;
         }
 
-        private int checkValue(int check)
+        public void Update(double X, double Y)
         {
-            if (check < 0)
-                throw new ArgumentOutOfRangeException("Coordinates cannot be negative.");
-            return check;
+            x += X;
+            y += Y;
         }
     }
 }
