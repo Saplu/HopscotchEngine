@@ -8,26 +8,26 @@ namespace BulletClassLibrary
 {
     public class Triangle : IShape
     {
-        List<Point> corners;
-        int maxX, minX, maxY, minY;
+        List<Vector2> corners;
+        double maxX, minX, maxY, minY;
 
-        public List<Point> Corners { get => corners; set => corners = checkValue(value); }
-        public int MaxX { get => maxX; }
-        public int MinX { get => minX; }
-        public int MaxY { get => maxY; }
-        public int MinY { get => minY; }
+        public List<Vector2> Corners { get => corners; set => corners = checkValue(value); }
+        public double MaxX { get => maxX; }
+        public double MinX { get => minX; }
+        public double MaxY { get => maxY; }
+        public double MinY { get => minY; }
 
-        public Triangle(Point c1, Point c2, Point c3)
+        public Triangle(Vector2 c1, Vector2 c2, Vector2 c3)
         {
             if (c1 != c2 && c2 != c3 && c3 != c1)
             {
-                corners = new List<Point>() { c1, c2, c3 };
+                corners = new List<Vector2>() { c1, c2, c3 };
             }
             else throw new Exception("Triangle must have three different corners.");
             setMaxMinValues();
         }
 
-        public bool Contains(Point point)
+        public bool Contains(Vector2 point)
         {
             double first, second, third;
             bool hasNeg, hasPos;
@@ -42,12 +42,12 @@ namespace BulletClassLibrary
             return !(hasNeg && hasPos);
         }
 
-        private double sign(Point check, Point corner1, Point corner2)
+        private double sign(Vector2 check, Vector2 corner1, Vector2 corner2)
         {
             return (check.X - corner2.X) * (corner1.Y - corner2.Y) - (corner1.X - corner2.X) * (check.Y - corner2.Y);
         }
 
-        private List<Point> checkValue(List<Point> value)
+        private List<Vector2> checkValue(List<Vector2> value)
         {
             if (value.Count != 3 || value[0] == value[1] || value[1] == value[2] || value[2] == value[0])
                 throw new ArgumentOutOfRangeException("TRIangle contains exactly THREE corners.");

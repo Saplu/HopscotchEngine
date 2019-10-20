@@ -8,38 +8,39 @@ namespace BulletClassLibrary
 {
     public class Octagon : IShape
     {
-        int height, width, maxX, minX, maxY, minY;
-        Point topL, topR, midTopR, midBotR, midTopL, midBotL, botL, botR, position;
-        List<Point> corners;
+        int height, width;
+        double maxX, minX, maxY, minY;
+        Vector2 topL, topR, midTopR, midBotR, midTopL, midBotL, botL, botR, position;
+        List<Vector2> corners;
         List<Triangle> virtualCorners;
 
         public int Height { get => height; set => height = setHeight(value); }
         public int Width { get => width; set => width = setWidth(value); }
-        public Point Position { get => position; set => position = changePosition(value); }
-        public List<Point> Corners { get => corners; }
+        public Vector2 Position { get => position; set => position = changePosition(value); }
+        public List<Vector2> Corners { get => corners; }
         public List<Triangle> VirtualCorners { get => virtualCorners; }
-        public int MaxX { get => maxX; }
-        public int MinX { get => minX; }
-        public int MaxY { get => maxY; }
-        public int MinY { get => minY; }
+        public double MaxX { get => maxX; }
+        public double MinX { get => minX; }
+        public double MaxY { get => maxY; }
+        public double MinY { get => minY; }
 
-        public Octagon(int height, int width, Point position)
+        public Octagon(int height, int width, Vector2 position)
         {
             this.position = position;
-            topL = new Point(position.X - Convert.ToInt32(width / 4), position.Y - Convert.ToInt32(height / 2));
-            topR = new Point(position.X + Convert.ToInt32(width / 4), position.Y - Convert.ToInt32(height / 2));
-            midTopR = new Point(position.X + Convert.ToInt32(width / 2), position.Y - Convert.ToInt32(height / 4));
-            midBotR = new Point(position.X + Convert.ToInt32(width / 2), position.Y + Convert.ToInt32(height / 4));
-            midTopL = new Point(position.X - Convert.ToInt32(width / 2), position.Y - Convert.ToInt32(height / 4));
-            midBotL = new Point(position.X - Convert.ToInt32(width / 2), position.Y + Convert.ToInt32(height / 4));
-            botL = new Point(position.X - Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
-            botR = new Point(position.X + Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
-            corners = new List<Point>() { topL, topR, midTopR, midBotR, botR, botL, midBotL, midTopL};
+            topL = new Vector2(position.X - Convert.ToInt32(width / 4), position.Y - Convert.ToInt32(height / 2));
+            topR = new Vector2(position.X + Convert.ToInt32(width / 4), position.Y - Convert.ToInt32(height / 2));
+            midTopR = new Vector2(position.X + Convert.ToInt32(width / 2), position.Y - Convert.ToInt32(height / 4));
+            midBotR = new Vector2(position.X + Convert.ToInt32(width / 2), position.Y + Convert.ToInt32(height / 4));
+            midTopL = new Vector2(position.X - Convert.ToInt32(width / 2), position.Y - Convert.ToInt32(height / 4));
+            midBotL = new Vector2(position.X - Convert.ToInt32(width / 2), position.Y + Convert.ToInt32(height / 4));
+            botL = new Vector2(position.X - Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
+            botR = new Vector2(position.X + Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
+            corners = new List<Vector2>() { topL, topR, midTopR, midBotR, botR, botL, midBotL, midTopL};
             setMaxMinValues();
-            virtualCorners = new List<Triangle>() { new Triangle(topR, new Point(midTopR.X, topR.Y), midTopR),
-            new Triangle(midBotR, new Point(midBotR.X, botR.Y), botR),
-            new Triangle(botL, new Point(midBotL.X, botL.Y), midBotL),
-            new Triangle(midTopL, new Point(midTopL.X, topL.Y), topL)};
+            virtualCorners = new List<Triangle>() { new Triangle(topR, new Vector2(midTopR.X, topR.Y), midTopR),
+            new Triangle(midBotR, new Vector2(midBotR.X, botR.Y), botR),
+            new Triangle(botL, new Vector2(midBotL.X, botL.Y), midBotL),
+            new Triangle(midTopL, new Vector2(midTopL.X, topL.Y), topL)};
         }
 
         public override bool Equals(object obj)
@@ -50,7 +51,7 @@ namespace BulletClassLibrary
             return corners.SequenceEqual(toCompareWith.corners);
         }
 
-        private Point changePosition(Point value)
+        private Vector2 changePosition(Vector2 value)
         {
             value = checkValue(value);
             var moveX = value.X - position.X;
@@ -95,7 +96,7 @@ namespace BulletClassLibrary
             return value;
         }
 
-        private Point checkValue(Point value)
+        private Vector2 checkValue(Vector2 value)
         {
             if (value.X < width / 2)
                 value.X = Convert.ToInt32(width / 2);

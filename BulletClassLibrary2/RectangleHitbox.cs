@@ -12,12 +12,12 @@ namespace BulletClassLibrary
 
         public Rectangle Box { get => box; }
 
-        public RectangleHitbox(int height, int width, Point position, int angle)
+        public RectangleHitbox(int height, int width, Vector2 position, int angle)
         {
             box = new Rectangle(width, height, position, angle);
         }
 
-        public bool Hit(Point point)
+        public bool Hit(Vector2 point)
         {
             return isInside(point);
         }
@@ -50,7 +50,7 @@ namespace BulletClassLibrary
             return false;
         }
 
-        private bool isInside(Point point)
+        private bool isInside(Vector2 point)
         {
             if (box.Angle != 0)
             {
@@ -66,19 +66,19 @@ namespace BulletClassLibrary
             return broadCheck(point);
         }
 
-        private Point[][] getsides(RectangleHitbox hitbox)
+        private Vector2[][] getsides(RectangleHitbox hitbox)
         {
-            var sides = new Point[4][]
+            var sides = new Vector2[4][]
             {
-                new Point[]{hitbox.box.Corners[0], hitbox.box.Corners[1]},
-                new Point[]{hitbox.box.Corners[2], hitbox.box.Corners[3]},
-                new Point[]{hitbox.box.Corners[1], hitbox.box.Corners[3]},
-                new Point[]{hitbox.box.Corners[0], hitbox.box.Corners[2]}
+                new Vector2[]{hitbox.box.Corners[0], hitbox.box.Corners[1]},
+                new Vector2[]{hitbox.box.Corners[2], hitbox.box.Corners[3]},
+                new Vector2[]{hitbox.box.Corners[1], hitbox.box.Corners[3]},
+                new Vector2[]{hitbox.box.Corners[0], hitbox.box.Corners[2]}
             };
             return sides;
         }
 
-        private bool checkY(Point[][] sides)
+        private bool checkY(Vector2[][] sides)
         {
             for (int i = 2; i < 3; i++)
             {
@@ -102,18 +102,18 @@ namespace BulletClassLibrary
             return list;
         }
 
-        private List<int> getCornerValues(List<Point> corners, bool isX)
+        private List<int> getCornerValues(List<Vector2> corners, bool isX)
         {
             var values = new List<int>();
             if (isX)
                 foreach (var item in corners)
-                    values.Add(item.X);
+                    values.Add(Convert.ToInt32(item.X));
             else foreach (var item in corners)
-                    values.Add(item.Y);
+                    values.Add(Convert.ToInt32(item.Y));
             return values;
         }
 
-        private bool broadCheck(Point point)
+        private bool broadCheck(Vector2 point)
         {
             if (point.X >= box.MinX && point.X <= box.MaxX &&
                 point.Y >= box.MinY && point.Y <= (box.MaxY))

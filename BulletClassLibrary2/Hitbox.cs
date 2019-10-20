@@ -10,12 +10,12 @@ namespace BulletClassLibrary
 
         public Octagon Box { get => box; }
 
-        public Hitbox(int height, int width, Point position)
+        public Hitbox(int height, int width, Vector2 position)
         {
             box = new Octagon(height, width, position);
         }
 
-        public bool Hit(Point point)
+        public bool Hit(Vector2 point)
         {
             if (point.Y < box.Corners[0].Y || point.Y > box.Corners[5].Y || point.X < box.Corners[7].X || point.X > box.Corners[2].X)
                 return false;
@@ -53,7 +53,7 @@ namespace BulletClassLibrary
             return false;
         }
 
-        private int checkCorner(Point point)
+        private int checkCorner(Vector2 point)
         {
             if (point.X >= box.Position.X && point.Y <= box.Position.Y)
                 return 0;

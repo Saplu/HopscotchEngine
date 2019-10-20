@@ -8,10 +8,10 @@ namespace BulletClassLibrary
 {
     public interface IShape
     {
-        int MaxX { get; }
-        int MinX { get; }
-        int MaxY { get; }
-        int MinY { get; }
-        List<Point> Corners { get; }
+        double MaxX { get; }
+        double MinX { get; }
+        double MaxY { get; }
+        double MinY { get; }
+        List<Vector2> Corners { get; }
     }
 }

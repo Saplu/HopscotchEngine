@@ -8,21 +8,22 @@ namespace BulletClassLibrary
 {
     public class Rectangle : IShape
     {
-        int width, height, angle, maxX, maxY, minX, minY;
-        Point position;
-        List<Point> corners;
+        int width, height, angle;
+        double maxX, maxY, minX, minY;
+        Vector2 position;
+        List<Vector2> corners;
 
         public int Width { get => width; set => setWidth(value); }
         public int Height { get => height; set => setHeight(value); }
-        public Point Position { get => position; set => position = changePosition(value); }
-        public List<Point> Corners { get => corners; }
+        public Vector2 Position { get => position; set => position = changePosition(value); }
+        public List<Vector2> Corners { get => corners; }
         public int Angle { get => angle; set => angle = setAngle(value); }
-        public int MaxX { get => maxX; }
-        public int MaxY { get => maxY; }
-        public int MinX { get => minX; }
-        public int MinY { get => minY; }
+        public double MaxX { get => maxX; }
+        public double MaxY { get => maxY; }
+        public double MinX { get => minX; }
+        public double MinY { get => minY; }
 
-        public Rectangle(int width, int height, Point position)
+        public Rectangle(int width, int height, Vector2 position)
         {
             this.width = width;
             this.height = height;
@@ -32,7 +33,7 @@ namespace BulletClassLibrary
             setMaxMinValues();
         }
 
-        public Rectangle(int width, int height, Point position, int angle)
+        public Rectangle(int width, int height, Vector2 position, int angle)
         {
             this.width = width;
             this.height = height;
@@ -50,7 +51,7 @@ namespace BulletClassLibrary
             return corners.SequenceEqual(toCompareWith.corners);
         }
 
-        private Point changePosition(Point value)
+        private Vector2 changePosition(Vector2 value)
         {
             value = checkValue(value);
             corners = calculateCorners(angle);
@@ -81,15 +82,15 @@ namespace BulletClassLibrary
             return value;
         }
 
-        private List<Point> calculateCorners(int angle)
+        private List<Vector2> calculateCorners(int angle)
         {
             if (angle == 0)
-                corners = new List<Point>() { new Point(position.X - width / 2, position.Y - height / 2),
-                    new Point(position.X + width / 2, position.Y - height / 2), new Point(position.X - width / 2, position.Y + height / 2),
-                    new Point(position.X + width / 2, position.Y + height / 2)};
+                corners = new List<Vector2>() { new Vector2(position.X - width / 2, position.Y - height / 2),
+                    new Vector2(position.X + width / 2, position.Y - height / 2), new Vector2(position.X - width / 2, position.Y + height / 2),
+                    new Vector2(position.X + width / 2, position.Y + height / 2)};
             else
             {
-                corners = new List<Point>();
+                corners = new List<Vector2>();
                 for (int i = 0; i < 4; i++)
                 {
                     
@@ -105,13 +106,13 @@ namespace BulletClassLibrary
                     double rotatedX = (tempX * Math.Cos(angle * Math.PI/180)) - (tempY * Math.Sin(angle * Math.PI/180));
                     double rotatedY = (tempX * Math.Sin(angle * Math.PI/180)) + (tempY * Math.Cos(angle * Math.PI/180));
 
-                    corners.Add(new Point(Convert.ToInt32(rotatedX + position.X), Convert.ToInt32(rotatedY + position.Y)));
+                    corners.Add(new Vector2(Convert.ToInt32(rotatedX + position.X), Convert.ToInt32(rotatedY + position.Y)));
                 }
             }
             return corners;
         }
 
-        private Point checkValue(Point value)
+        private Vector2 checkValue(Vector2 value)
         {
             if (value.X < width / 2)
                 value.X = Convert.ToInt32(width / 2);
@@ -147,9 +148,9 @@ namespace BulletClassLibrary
             var values = new List<int>();
             if (isX)
                 foreach (var item in corners)
-                    values.Add(item.X);
+                    values.Add(Convert.ToInt32(item.X));
             else foreach (var item in corners)
-                    values.Add(item.Y);
+                    values.Add(Convert.ToInt32(item.Y));
             return values;
         }
     }

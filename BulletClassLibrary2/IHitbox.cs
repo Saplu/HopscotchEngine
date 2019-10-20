@@ -8,7 +8,7 @@ namespace BulletClassLibrary
 {
     interface IHitbox
     {
-        bool Hit(Point point);
+        bool Hit(Vector2 point);
         bool Hit(Hitbox box);
         bool Hit(RectangleHitbox box);
         bool CheckHitbox(IShape box);
