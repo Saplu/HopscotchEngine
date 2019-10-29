@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BulletClassLibrary
 {
-    interface IHitbox
+    public interface IHitbox
     {
         bool Hit(Vector2 point);
         bool Hit(Hitbox box);

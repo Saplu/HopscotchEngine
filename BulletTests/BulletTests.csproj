@@ -69,6 +69,7 @@
     <Compile Include="UnitTest4.cs" />
     <Compile Include="UnitTest5.cs" />
     <Compile Include="GametimeTests.cs" />
+    <Compile Include="RangeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
