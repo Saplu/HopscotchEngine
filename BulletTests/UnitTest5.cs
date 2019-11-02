@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Geometry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BulletClassLibrary;
 
 namespace BulletTests
 {

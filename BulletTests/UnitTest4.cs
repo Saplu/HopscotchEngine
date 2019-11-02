@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Geometry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BulletClassLibrary;
+using System.Collections.Generic;
 
 namespace BulletTests
 {
