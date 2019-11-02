@@ -9,7 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletClassLibrary", "Bulle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Physics", "Physics\Physics.csproj", "{1F6E5D44-C997-486A-A1BE-2B64D0F4AF32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometry", "Geometry\Geometry.csproj", "{74A49385-D4B1-442C-8646-53F012A9D4D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geometry", "Geometry\Geometry.csproj", "{74A49385-D4B1-442C-8646-53F012A9D4D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rendering", "Rendering\Rendering.csproj", "{D6C64DE0-C698-4DFD-A16D-9A22DE01AEF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{CAC6082E-20F3-4DCB-B289-C9F0F03A3C89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineCore", "EngineCore\EngineCore.csproj", "{543BEA82-6184-4FB2-A241-B483B0AD30F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{74A49385-D4B1-442C-8646-53F012A9D4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74A49385-D4B1-442C-8646-53F012A9D4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74A49385-D4B1-442C-8646-53F012A9D4D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6C64DE0-C698-4DFD-A16D-9A22DE01AEF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6C64DE0-C698-4DFD-A16D-9A22DE01AEF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6C64DE0-C698-4DFD-A16D-9A22DE01AEF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6C64DE0-C698-4DFD-A16D-9A22DE01AEF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAC6082E-20F3-4DCB-B289-C9F0F03A3C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAC6082E-20F3-4DCB-B289-C9F0F03A3C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAC6082E-20F3-4DCB-B289-C9F0F03A3C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAC6082E-20F3-4DCB-B289-C9F0F03A3C89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{543BEA82-6184-4FB2-A241-B483B0AD30F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543BEA82-6184-4FB2-A241-B483B0AD30F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543BEA82-6184-4FB2-A241-B483B0AD30F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543BEA82-6184-4FB2-A241-B483B0AD30F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
