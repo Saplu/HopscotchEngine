@@ -12,6 +12,6 @@ namespace BulletClassLibrary
         double MinX { get; }
         double MaxY { get; }
         double MinY { get; }
-        List<Vector2> Corners { get; }
+        Vector2 Position { get; set; }
     }
 }

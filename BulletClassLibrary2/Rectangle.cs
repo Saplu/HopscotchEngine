@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BulletClassLibrary
 {
-    public class Rectangle : IShape
+    public class Rectangle : IPolygon
     {
         int width, height, angle;
         double maxX, maxY, minX, minY;

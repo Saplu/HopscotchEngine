@@ -42,11 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bullet.cs" />
+    <Compile Include="Circle.cs" />
     <Compile Include="IGameObject.cs" />
     <Compile Include="GameTime.cs" />
     <Compile Include="Hitbox.cs" />
     <Compile Include="IHitbox.cs" />
     <Compile Include="IImmaterialObject.cs" />
+    <Compile Include="IPolygon.cs" />
     <Compile Include="IShape.cs" />
     <Compile Include="Octagon.cs" />
     <Compile Include="ISolidObject.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BulletClassLibrary
 {
-    public class Triangle : IShape
+    public class Triangle : IPolygon
     {
         List<Vector2> corners;
         double maxX, minX, maxY, minY;

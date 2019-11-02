@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BulletClassLibrary
 {
-    public class Octagon : IShape
+    public class Octagon : IPolygon
     {
         int height, width;
         double maxX, minX, maxY, minY;

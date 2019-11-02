@@ -25,22 +25,22 @@ namespace BulletClassLibrary
 
         public bool Hit(Hitbox box)
         {
-            if (!broadCheck(box.Box))
+            if (!broadCheck((IShape)box.Box))
                 return false;
-            if (CheckHitbox(box.Box))
+            if (CheckHitbox((IShape)box.Box))
                 return true;
-            if (box.CheckHitbox(this.Box))
+            if (box.CheckHitbox((IShape)this.Box))
                 return true;
             return pierces(box);
         }
 
         public bool Hit(RectangleHitbox box)
         {
-            if (!broadCheck(box.Box))
+            if (!broadCheck((IShape)box.Box))
                 return false;
-            if (CheckHitbox(box.Box))
+            if (CheckHitbox((IShape)box.Box))
                 return true;
-            else return box.CheckHitbox(this.box);
+            else return box.CheckHitbox((IShape)this.box);
         }
 
         public bool CheckHitbox(IShape hitbox)
