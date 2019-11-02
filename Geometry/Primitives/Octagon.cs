@@ -6,39 +6,39 @@ namespace Geometry
 {
     public class Octagon : IPolygon
     {
-        int height, width;
-        double maxX, minX, maxY, minY;
-        Vector2 topL, topR, midTopR, midBotR, midTopL, midBotL, botL, botR, position;
-        List<Vector2> corners;
-        List<Triangle> virtualCorners;
+        int _height, _width;
+        double _maxX, _minX, _maxY, _minY;
+        Vector2 _topL, _topR, _midTopR, _midBotR, _midTopL, _midBotL, _botL, _botR, _position;
+        List<Vector2> _corners;
+        List<Triangle> _virtualCorners;
 
-        public int Height { get => height; set => height = setHeight(value); }
-        public int Width { get => width; set => width = setWidth(value); }
-        public Vector2 Position { get => position; set => position = changePosition(value); }
-        public List<Vector2> Corners { get => corners; }
-        public List<Triangle> VirtualCorners { get => virtualCorners; }
-        public double MaxX { get => maxX; }
-        public double MinX { get => minX; }
-        public double MaxY { get => maxY; }
-        public double MinY { get => minY; }
+        public int Height { get => _height; set => _height = SetHeight(value); }
+        public int Width { get => _width; set => _width = SetWidth(value); }
+        public Vector2 Position { get => _position; set => _position = ChangePosition(value); }
+        public List<Vector2> Corners { get => _corners; }
+        public List<Triangle> VirtualCorners { get => _virtualCorners; }
+        public double MaxX { get => _maxX; }
+        public double MinX { get => _minX; }
+        public double MaxY { get => _maxY; }
+        public double MinY { get => _minY; }
 
         public Octagon(int height, int width, Vector2 position)
         {
-            this.position = position;
-            topL = new Vector2(position.X - Convert.ToInt32(width / 4), position.Y - Convert.ToInt32(height / 2));
-            topR = new Vector2(position.X + Convert.ToInt32(width / 4), position.Y - Convert.ToInt32(height / 2));
-            midTopR = new Vector2(position.X + Convert.ToInt32(width / 2), position.Y - Convert.ToInt32(height / 4));
-            midBotR = new Vector2(position.X + Convert.ToInt32(width / 2), position.Y + Convert.ToInt32(height / 4));
-            midTopL = new Vector2(position.X - Convert.ToInt32(width / 2), position.Y - Convert.ToInt32(height / 4));
-            midBotL = new Vector2(position.X - Convert.ToInt32(width / 2), position.Y + Convert.ToInt32(height / 4));
-            botL = new Vector2(position.X - Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
-            botR = new Vector2(position.X + Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
-            corners = new List<Vector2>() { topL, topR, midTopR, midBotR, botR, botL, midBotL, midTopL};
-            setMaxMinValues();
-            virtualCorners = new List<Triangle>() { new Triangle(topR, new Vector2(midTopR.X, topR.Y), midTopR),
-            new Triangle(midBotR, new Vector2(midBotR.X, botR.Y), botR),
-            new Triangle(botL, new Vector2(midBotL.X, botL.Y), midBotL),
-            new Triangle(midTopL, new Vector2(midTopL.X, topL.Y), topL)};
+            this._position = position;
+            _topL = new Vector2(position.X - Convert.ToInt32(width / 4), position.Y - Convert.ToInt32(height / 2));
+            _topR = new Vector2(position.X + Convert.ToInt32(width / 4), position.Y - Convert.ToInt32(height / 2));
+            _midTopR = new Vector2(position.X + Convert.ToInt32(width / 2), position.Y - Convert.ToInt32(height / 4));
+            _midBotR = new Vector2(position.X + Convert.ToInt32(width / 2), position.Y + Convert.ToInt32(height / 4));
+            _midTopL = new Vector2(position.X - Convert.ToInt32(width / 2), position.Y - Convert.ToInt32(height / 4));
+            _midBotL = new Vector2(position.X - Convert.ToInt32(width / 2), position.Y + Convert.ToInt32(height / 4));
+            _botL = new Vector2(position.X - Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
+            _botR = new Vector2(position.X + Convert.ToInt32(width / 4), position.Y + Convert.ToInt32(height / 2));
+            _corners = new List<Vector2>() { _topL, _topR, _midTopR, _midBotR, _botR, _botL, _midBotL, _midTopL};
+            SetMaxMinValues();
+            _virtualCorners = new List<Triangle>() { new Triangle(_topR, new Vector2(_midTopR.X, _topR.Y), _midTopR),
+            new Triangle(_midBotR, new Vector2(_midBotR.X, _botR.Y), _botR),
+            new Triangle(_botL, new Vector2(_midBotL.X, _botL.Y), _midBotL),
+            new Triangle(_midTopL, new Vector2(_midTopL.X, _topL.Y), _topL)};
         }
 
         public override bool Equals(object obj)
@@ -46,80 +46,80 @@ namespace Geometry
             var toCompareWith = obj as Octagon;
             if (toCompareWith == null)
                 return false;
-            return corners.SequenceEqual(toCompareWith.corners);
+            return _corners.SequenceEqual(toCompareWith._corners);
         }
 
-        private Vector2 changePosition(Vector2 value)
+        private Vector2 ChangePosition(Vector2 value)
         {
-            value = checkValue(value);
-            var moveX = value.X - position.X;
-            var moveY = value.Y - position.Y;
-            foreach(var point in corners)
+            value = CheckValue(value);
+            var moveX = value.X - _position.X;
+            var moveY = value.Y - _position.Y;
+            foreach(var point in _corners)
             {
                 point.X += moveX;
                 point.Y += moveY;
             }
-            foreach(var triangle in virtualCorners)
+            foreach(var triangle in _virtualCorners)
             {
                 triangle.Corners[1].X += moveX;
                 triangle.Corners[1].Y += moveY;
             }
-            setMaxMinValues();
+            SetMaxMinValues();
             return value;
         }
 
-        private int setHeight(int value)
+        private int SetHeight(int value)
         {
-            corners[0].Y = position.Y - Convert.ToInt32(value / 2);
-            corners[1].Y = position.Y - Convert.ToInt32(value / 2);
-            corners[2].Y = position.Y - Convert.ToInt32(value / 4);
-            corners[3].Y = position.Y + Convert.ToInt32(value / 4);
-            corners[4].Y = position.Y + Convert.ToInt32(value / 2);
-            corners[5].Y = position.Y + Convert.ToInt32(value / 2);
-            corners[6].Y = position.Y + Convert.ToInt32(value / 4);
-            corners[7].Y = position.Y - Convert.ToInt32(value / 4);
+            _corners[0].Y = _position.Y - Convert.ToInt32(value / 2);
+            _corners[1].Y = _position.Y - Convert.ToInt32(value / 2);
+            _corners[2].Y = _position.Y - Convert.ToInt32(value / 4);
+            _corners[3].Y = _position.Y + Convert.ToInt32(value / 4);
+            _corners[4].Y = _position.Y + Convert.ToInt32(value / 2);
+            _corners[5].Y = _position.Y + Convert.ToInt32(value / 2);
+            _corners[6].Y = _position.Y + Convert.ToInt32(value / 4);
+            _corners[7].Y = _position.Y - Convert.ToInt32(value / 4);
             return value;
         }
 
-        private int setWidth(int value)
+        private int SetWidth(int value)
         {
-            corners[0].X = position.X - Convert.ToInt32(value / 4);
-            corners[1].X = position.X + Convert.ToInt32(value / 4);
-            corners[2].X = position.X + Convert.ToInt32(value / 2);
-            corners[3].X = position.X + Convert.ToInt32(value / 2);
-            corners[4].X = position.X + Convert.ToInt32(value / 4);
-            corners[5].X = position.X - Convert.ToInt32(value / 4);
-            corners[6].X = position.X - Convert.ToInt32(value / 2);
-            corners[7].X = position.X - Convert.ToInt32(value / 2);
+            _corners[0].X = _position.X - Convert.ToInt32(value / 4);
+            _corners[1].X = _position.X + Convert.ToInt32(value / 4);
+            _corners[2].X = _position.X + Convert.ToInt32(value / 2);
+            _corners[3].X = _position.X + Convert.ToInt32(value / 2);
+            _corners[4].X = _position.X + Convert.ToInt32(value / 4);
+            _corners[5].X = _position.X - Convert.ToInt32(value / 4);
+            _corners[6].X = _position.X - Convert.ToInt32(value / 2);
+            _corners[7].X = _position.X - Convert.ToInt32(value / 2);
             return value;
         }
 
-        private Vector2 checkValue(Vector2 value)
+        private Vector2 CheckValue(Vector2 value)
         {
-            if (value.X < width / 2)
-                value.X = Convert.ToInt32(width / 2);
-            if (value.Y < height / 2)
-                value.Y = Convert.ToInt32(height / 2);
+            if (value.X < _width / 2)
+                value.X = Convert.ToInt32(_width / 2);
+            if (value.Y < _height / 2)
+                value.Y = Convert.ToInt32(_height / 2);
             return value;
         }
 
-        private void setMaxMinValues()
+        private void SetMaxMinValues()
         {
-            maxX = midTopR.X;
-            minX = midTopL.X;
-            maxY = botR.Y;
-            minY = topR.Y;
+            _maxX = _midTopR.X;
+            _minX = _midTopL.X;
+            _maxY = _botR.Y;
+            _minY = _topR.Y;
         }
 
         public override int GetHashCode()
         {
             var hashCode = 740219888;
-            hashCode = hashCode * -1521134295 + height.GetHashCode();
-            hashCode = hashCode * -1521134295 + width.GetHashCode();
-            hashCode = hashCode * -1521134295 + maxX.GetHashCode();
-            hashCode = hashCode * -1521134295 + minX.GetHashCode();
-            hashCode = hashCode * -1521134295 + maxY.GetHashCode();
-            hashCode = hashCode * -1521134295 + minY.GetHashCode();
+            hashCode = hashCode * -1521134295 + _height.GetHashCode();
+            hashCode = hashCode * -1521134295 + _width.GetHashCode();
+            hashCode = hashCode * -1521134295 + _maxX.GetHashCode();
+            hashCode = hashCode * -1521134295 + _minX.GetHashCode();
+            hashCode = hashCode * -1521134295 + _maxY.GetHashCode();
+            hashCode = hashCode * -1521134295 + _minY.GetHashCode();
 
             return hashCode;
         }

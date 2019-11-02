@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GravityClassLibrary
+namespace Physics
 {
     public interface IGravity
     {

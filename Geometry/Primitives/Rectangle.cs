@@ -6,39 +6,39 @@ namespace Geometry
 {
     public class Rectangle : IPolygon
     {
-        int width, height, angle;
-        double maxX, maxY, minX, minY;
-        Vector2 position;
-        List<Vector2> corners;
+        int _width, _height, _angle;
+        double _maxX, _maxY, _minX, _minY;
+        Vector2 _position;
+        List<Vector2> _corners;
 
-        public int Width { get => width; set => setWidth(value); }
-        public int Height { get => height; set => setHeight(value); }
-        public Vector2 Position { get => position; set => position = changePosition(value); }
-        public List<Vector2> Corners { get => corners; }
-        public int Angle { get => angle; set => angle = setAngle(value); }
-        public double MaxX { get => maxX; }
-        public double MaxY { get => maxY; }
-        public double MinX { get => minX; }
-        public double MinY { get => minY; }
+        public int Width { get => _width; set => SetWidth(value); }
+        public int Height { get => _height; set => SetHeight(value); }
+        public Vector2 Position { get => _position; set => _position = ChangePosition(value); }
+        public List<Vector2> Corners { get => _corners; }
+        public int Angle { get => _angle; set => _angle = SetAngle(value); }
+        public double MaxX { get => _maxX; }
+        public double MaxY { get => _maxY; }
+        public double MinX { get => _minX; }
+        public double MinY { get => _minY; }
 
         public Rectangle(int width, int height, Vector2 position)
         {
-            this.width = width;
-            this.height = height;
-            this.position = position;
-            angle = 0;
-            corners = calculateCorners(angle);
-            setMaxMinValues();
+            this._width = width;
+            this._height = height;
+            this._position = position;
+            _angle = 0;
+            _corners = CalculateCorners(_angle);
+            SetMaxMinValues();
         }
 
         public Rectangle(int width, int height, Vector2 position, int angle)
         {
-            this.width = width;
-            this.height = height;
-            this.position = position;
-            this.angle = angle;
-            corners = calculateCorners(angle);
-            setMaxMinValues();
+            this._width = width;
+            this._height = height;
+            this._position = position;
+            this._angle = angle;
+            _corners = CalculateCorners(angle);
+            SetMaxMinValues();
         }
 
         public override bool Equals(object obj)
@@ -46,93 +46,93 @@ namespace Geometry
             var toCompareWith = obj as Rectangle;
             if (toCompareWith == null)
                 return false;
-            return corners.SequenceEqual(toCompareWith.corners);
+            return _corners.SequenceEqual(toCompareWith._corners);
         }
 
-        private Vector2 changePosition(Vector2 value)
+        private Vector2 ChangePosition(Vector2 value)
         {
-            value = checkValue(value);
-            corners = calculateCorners(angle);
-            setMaxMinValues();
+            value = CheckValue(value);
+            _corners = CalculateCorners(_angle);
+            SetMaxMinValues();
             return value;
         }
 
-        private void setWidth(int value)
+        private void SetWidth(int value)
         {
-            width = value;
-            corners = calculateCorners(angle);
-            setMaxMinValues();            
+            _width = value;
+            _corners = CalculateCorners(_angle);
+            SetMaxMinValues();            
         }
 
-        private void setHeight(int value)
+        private void SetHeight(int value)
         {
-            height = value;
-            corners = calculateCorners(angle);
-            setMaxMinValues();
+            _height = value;
+            _corners = CalculateCorners(_angle);
+            SetMaxMinValues();
         }
 
-        private int setAngle(int value)
+        private int SetAngle(int value)
         {
-            if (value != angle)
+            if (value != _angle)
             {
-                corners = calculateCorners(value);
+                _corners = CalculateCorners(value);
             }
             return value;
         }
 
-        private List<Vector2> calculateCorners(int angle)
+        private List<Vector2> CalculateCorners(int angle)
         {
             if (angle == 0)
-                corners = new List<Vector2>() { new Vector2(position.X - width / 2, position.Y - height / 2),
-                    new Vector2(position.X + width / 2, position.Y - height / 2), new Vector2(position.X - width / 2, position.Y + height / 2),
-                    new Vector2(position.X + width / 2, position.Y + height / 2)};
+                _corners = new List<Vector2>() { new Vector2(_position.X - _width / 2, _position.Y - _height / 2),
+                    new Vector2(_position.X + _width / 2, _position.Y - _height / 2), new Vector2(_position.X - _width / 2, _position.Y + _height / 2),
+                    new Vector2(_position.X + _width / 2, _position.Y + _height / 2)};
             else
             {
-                corners = new List<Vector2>();
+                _corners = new List<Vector2>();
                 for (int i = 0; i < 4; i++)
                 {
                     
                     double tempX = 0;
                     double tempY = 0;
                     if (i == 0 || i == 2)
-                        tempX = (position.X - width / 2) - position.X;
-                    else tempX = (position.X + width / 2) -position.X;
+                        tempX = (_position.X - _width / 2) - _position.X;
+                    else tempX = (_position.X + _width / 2) -_position.X;
                     if (i == 0 || i == 1)
-                        tempY = (position.Y - width / 2) - position.Y;
-                    else tempY = (position.Y + width / 2) - position.Y;
+                        tempY = (_position.Y - _width / 2) - _position.Y;
+                    else tempY = (_position.Y + _width / 2) - _position.Y;
                    
                     double rotatedX = (tempX * Math.Cos(angle * Math.PI/180)) - (tempY * Math.Sin(angle * Math.PI/180));
                     double rotatedY = (tempX * Math.Sin(angle * Math.PI/180)) + (tempY * Math.Cos(angle * Math.PI/180));
 
-                    corners.Add(new Vector2(Convert.ToInt32(rotatedX + position.X), Convert.ToInt32(rotatedY + position.Y)));
+                    _corners.Add(new Vector2(Convert.ToInt32(rotatedX + _position.X), Convert.ToInt32(rotatedY + _position.Y)));
                 }
             }
-            return corners;
+            return _corners;
         }
 
-        private Vector2 checkValue(Vector2 value)
+        private Vector2 CheckValue(Vector2 value)
         {
-            if (value.X < width / 2)
-                value.X = Convert.ToInt32(width / 2);
-            if (value.Y < height / 2)
-                value.Y = Convert.ToInt32(height / 2);
+            if (value.X < _width / 2)
+                value.X = Convert.ToInt32(_width / 2);
+            if (value.Y < _height / 2)
+                value.Y = Convert.ToInt32(_height / 2);
             return value;
         }
 
-        private void setMaxMinValues()
+        private void SetMaxMinValues()
         {
-            var values = getBorderValues();
-            maxX = values[0];
-            maxY = values[1];
-            minX = values[2];
-            minY = values[3];
+            var values = GetBorderValues();
+            _maxX = values[0];
+            _maxY = values[1];
+            _minX = values[2];
+            _minY = values[3];
         }
 
 
-        private List<int> getBorderValues()
+        private List<int> GetBorderValues()
         {
-            List<int> xValues = getCornerValues(true);
-            List<int> yValues = getCornerValues(false);
+            List<int> xValues = GetCornerValues(true);
+            List<int> yValues = GetCornerValues(false);
             var list = new List<int>();
             list.Add(xValues.Max());
             list.Add(yValues.Max());
@@ -141,13 +141,13 @@ namespace Geometry
             return list;
         }
 
-        private List<int> getCornerValues(bool isX)
+        private List<int> GetCornerValues(bool isX)
         {
             var values = new List<int>();
             if (isX)
-                foreach (var item in corners)
+                foreach (var item in _corners)
                     values.Add(Convert.ToInt32(item.X));
-            else foreach (var item in corners)
+            else foreach (var item in _corners)
                     values.Add(Convert.ToInt32(item.Y));
             return values;
         }
@@ -155,13 +155,13 @@ namespace Geometry
         public override int GetHashCode()
         {
             var hashCode = -649387116;
-            hashCode = hashCode * -1521134295 + width.GetHashCode();
-            hashCode = hashCode * -1521134295 + height.GetHashCode();
-            hashCode = hashCode * -1521134295 + angle.GetHashCode();
-            hashCode = hashCode * -1521134295 + maxX.GetHashCode();
-            hashCode = hashCode * -1521134295 + maxY.GetHashCode();
-            hashCode = hashCode * -1521134295 + minX.GetHashCode();
-            hashCode = hashCode * -1521134295 + minY.GetHashCode();
+            hashCode = hashCode * -1521134295 + _width.GetHashCode();
+            hashCode = hashCode * -1521134295 + _height.GetHashCode();
+            hashCode = hashCode * -1521134295 + _angle.GetHashCode();
+            hashCode = hashCode * -1521134295 + _maxX.GetHashCode();
+            hashCode = hashCode * -1521134295 + _maxY.GetHashCode();
+            hashCode = hashCode * -1521134295 + _minX.GetHashCode();
+            hashCode = hashCode * -1521134295 + _minY.GetHashCode();
             return hashCode;
         }
     }

@@ -5,21 +5,21 @@ namespace Geometry
 {
     public class Triangle : IPolygon
     {
-        List<Vector2> corners;
-        double maxX, minX, maxY, minY;
+        List<Vector2> _corners;
+        double _maxX, _minX, _maxY, _minY;
 
-        public List<Vector2> Corners { get => corners; set => corners = CheckValue(value); }
-        public double MaxX { get => maxX; }
-        public double MinX { get => minX; }
-        public double MaxY { get => maxY; }
-        public double MinY { get => minY; }
+        public List<Vector2> Corners { get => _corners; set => _corners = CheckValue(value); }
+        public double MaxX { get => _maxX; }
+        public double MinX { get => _minX; }
+        public double MaxY { get => _maxY; }
+        public double MinY { get => _minY; }
         public Vector2 Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public Triangle(Vector2 c1, Vector2 c2, Vector2 c3)
         {
             if (c1 != c2 && c2 != c3 && c3 != c1)
             {
-                corners = new List<Vector2>() { c1, c2, c3 };
+                _corners = new List<Vector2>() { c1, c2, c3 };
             }
             else throw new Exception("Triangle must have three different corners.");
             SetMaxMinValues();
@@ -30,9 +30,9 @@ namespace Geometry
             double first, second, third;
             bool hasNeg, hasPos;
 
-            first = Sign(point, corners[0], corners[1]);
-            second = Sign(point, corners[1], corners[2]);
-            third = Sign(point, corners[2], corners[0]);
+            first = Sign(point, _corners[0], _corners[1]);
+            second = Sign(point, _corners[1], _corners[2]);
+            third = Sign(point, _corners[2], _corners[0]);
 
             hasNeg = (first <= 0) || (second <= 0) || (third <= 0);
             hasPos = (first >= 0) || (second >= 0) || (third >= 0);
@@ -55,20 +55,20 @@ namespace Geometry
 
         private void SetMaxMinValues()
         {
-            minX = int.MaxValue;
-            maxX = int.MinValue;
-            minY = int.MaxValue;
-            maxY = int.MinValue;
-            foreach(var corner in corners)
+            _minX = int.MaxValue;
+            _maxX = int.MinValue;
+            _minY = int.MaxValue;
+            _maxY = int.MinValue;
+            foreach(var corner in _corners)
             {
-                if (corner.X < minX)
-                    minX = corner.X;
-                if (corner.X > maxX)
-                    maxX = corner.X;
-                if (corner.Y < minY)
-                    minY = corner.Y;
-                if (corner.Y > maxY)
-                    maxY = corner.Y;
+                if (corner.X < _minX)
+                    _minX = corner.X;
+                if (corner.X > _maxX)
+                    _maxX = corner.X;
+                if (corner.Y < _minY)
+                    _minY = corner.Y;
+                if (corner.Y > _maxY)
+                    _maxY = corner.Y;
             }
         }
     }
