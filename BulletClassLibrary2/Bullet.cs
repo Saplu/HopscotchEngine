@@ -1,32 +1,33 @@
 ﻿using Geometry;
 using System;
+using Physics;
 
 
 namespace BulletClassLibrary
 {
     public class Bullet : ISolidObject
     {
-        Vector2 position, speed;
-        GravityClassLibrary.Gravity gravity;
-        bool active;
-        double trueSpeed;
+        Vector2 _position, _speed;
+        Gravity _gravity;
+        bool _active;
+        double _trueSpeed;
 
-        public Vector2 Position { get => position; set => position = value; }
-        public Vector2 Speed { get => speed; set => speed = value; }
+        public Vector2 Position { get => _position; set => _position = value; }
+        public Vector2 Speed { get => _speed; set => _speed = value; }
 
         public Bullet(int X, int Y, double vX, double vY)
         {
-            this.active = true;
-            gravity = new GravityClassLibrary.Gravity(0.1);
-            position = new Vector2(X, Y);
-            speed = new Vector2(vX, vY);
-            calculateSpeed();
+            this._active = true;
+            _gravity = new Gravity(0.1);
+            _position = new Vector2(X, Y);
+            _speed = new Vector2(vX, vY);
+            CalculateSpeed();
         }
 
         public void Update(int milliseconds)
         {
-            gravity.Update(speed.Y, active, milliseconds);
-            position.Update(speed.X, speed.Y);
+            _gravity.Update(_speed.Y, _active, milliseconds);
+            _position.Update(_speed.X, _speed.Y);
             //Sitten collision checkiä, activen mahdollinen muutos osumasta.
         }
 
@@ -40,11 +41,11 @@ namespace BulletClassLibrary
             return false;
         }
 
-        private void calculateSpeed()
+        private void CalculateSpeed()
         {
-            var first = speed.X * speed.X;
-            var second = speed.Y * speed.Y;
-            trueSpeed = Math.Sqrt(first + second);
+            var first = _speed.X * _speed.X;
+            var second = _speed.Y * _speed.Y;
+            _trueSpeed = Math.Sqrt(first + second);
         }
     }
 }

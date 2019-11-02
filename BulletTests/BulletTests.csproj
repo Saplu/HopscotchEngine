@@ -85,7 +85,7 @@
       <Project>{74A49385-D4B1-442C-8646-53F012A9D4D6}</Project>
       <Name>Geometry</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GravityClassLibrary2\Physics.csproj">
+    <ProjectReference Include="..\Physics\Physics.csproj">
       <Project>{1f6e5d44-c997-486a-a1be-2b64d0f4af32}</Project>
       <Name>Physics</Name>
     </ProjectReference>

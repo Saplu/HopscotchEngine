@@ -8,26 +8,26 @@ namespace BulletClassLibrary
 {
     public class GameTime
     {
-        TimeSpan totalGameTime, sinceLastUpdate;
-        DateTime startTime, previousUpdateTime;
+        TimeSpan _totalGameTime, _sinceLastUpdate;
+        DateTime _startTime, _previousUpdateTime;
 
-        public TimeSpan TotalGameTime { get => totalGameTime; set => totalGameTime = value; }
-        public TimeSpan SinceLastUpdate { get => sinceLastUpdate; set => sinceLastUpdate = value; }
+        public TimeSpan TotalGameTime { get => _totalGameTime; set => _totalGameTime = value; }
+        public TimeSpan SinceLastUpdate { get => _sinceLastUpdate; set => _sinceLastUpdate = value; }
 
         public GameTime()
         {
-            totalGameTime = new TimeSpan();
-            sinceLastUpdate = new TimeSpan();
-            startTime = DateTime.Now;
-            previousUpdateTime = DateTime.Now;
+            _totalGameTime = new TimeSpan();
+            _sinceLastUpdate = new TimeSpan();
+            _startTime = DateTime.Now;
+            _previousUpdateTime = DateTime.Now;
         }
 
         public void Update()
         {
             var now = DateTime.Now;
-            totalGameTime = now - startTime;
-            sinceLastUpdate = now - previousUpdateTime;
-            previousUpdateTime = now;
+            _totalGameTime = now - _startTime;
+            _sinceLastUpdate = now - _previousUpdateTime;
+            _previousUpdateTime = now;
         }
     }
 }
