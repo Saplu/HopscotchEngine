@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletTests", "BulletTests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletClassLibrary", "BulletClassLibrary2\BulletClassLibrary.csproj", "{0608C0E9-1E53-41CE-976D-F74A64B77CD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Physics", "GravityClassLibrary2\Physics.csproj", "{1F6E5D44-C997-486A-A1BE-2B64D0F4AF32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Physics", "Physics\Physics.csproj", "{1F6E5D44-C997-486A-A1BE-2B64D0F4AF32}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometry", "Geometry\Geometry.csproj", "{74A49385-D4B1-442C-8646-53F012A9D4D6}"
 EndProject
