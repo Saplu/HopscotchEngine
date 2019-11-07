@@ -6,8 +6,15 @@ Juuso:
 Ainaski renderöinti ja arkkitehtipuoli
 
 Halti:
-Etenkin Juuson määrittelemien palasten tekeminen. Tulossa ainaski
-pelikello
-hitboxit
-collision detection
-nyt on painovoima, mitä muuta fysiikkaa tarvitaan?
+Etenkin Juuson määrittelemien palasten tekeminen.
+Kentän määritelmä. Jonkinlainen luokka kentästä. Tilesysteemi jotenkin. Miten saa tileistä kaltevia tasoja?
+Pitää pystyä piirtämään ja sisältää riittävät tiedot miten pelaaja pystyy liikkumaan siinä.
+Tausta erikseen, tilet ainoastaan erityisasioille.
+Tilelle tiätty oma luokka.
+
+Spritet. Miten piirretään? Tämä lienee enempi Juuson juttuja.
+Spritesheet käyttöön?
+
+SFML piirtää kaiken, sitä täytyy tutkia tätä varten!
+
+Myöskin pitää toki tehä ympyrä loppuun.
