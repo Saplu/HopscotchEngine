@@ -71,6 +71,7 @@
     <Compile Include="UnitTest5.cs" />
     <Compile Include="GametimeTests.cs" />
     <Compile Include="RangeTests.cs" />
+    <Compile Include="CircleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

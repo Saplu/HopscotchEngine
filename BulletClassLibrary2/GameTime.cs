@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace BulletClassLibrary
 {
-    public class GameTime
+    public static class GameTime
     {
-        TimeSpan _totalGameTime, _sinceLastUpdate;
-        DateTime _startTime, _previousUpdateTime;
+        static TimeSpan _totalGameTime, _sinceLastUpdate;
+        static DateTime _startTime, _previousUpdateTime;
 
-        public TimeSpan TotalGameTime { get => _totalGameTime; set => _totalGameTime = value; }
-        public TimeSpan SinceLastUpdate { get => _sinceLastUpdate; set => _sinceLastUpdate = value; }
+        public static TimeSpan TotalGameTime { get => _totalGameTime; set => _totalGameTime = value; }
+        public static TimeSpan SinceLastUpdate { get => _sinceLastUpdate; set => _sinceLastUpdate = value; }
 
-        public GameTime()
+        static GameTime()
         {
             _totalGameTime = new TimeSpan();
             _sinceLastUpdate = new TimeSpan();
@@ -22,7 +22,7 @@ namespace BulletClassLibrary
             _previousUpdateTime = DateTime.Now;
         }
 
-        public void Update()
+        public static void Update()
         {
             var now = DateTime.Now;
             _totalGameTime = now - _startTime;

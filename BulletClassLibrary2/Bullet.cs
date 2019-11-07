@@ -13,6 +13,7 @@ namespace BulletClassLibrary
         double _trueSpeed;
 
         public Vector2 Position { get => _position; set => _position = value; }
+        public Vector2 Hitbox { get => _position; }
         public Vector2 Speed { get => _speed; set => _speed = value; }
 
         public Bullet(int X, int Y, double vX, double vY)

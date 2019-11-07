@@ -1,12 +1,12 @@
 ﻿namespace Geometry
 {
-    public class Hitbox : IHitbox
+    public class OctagonHitbox : IHitbox
     {
         Octagon _box;
 
         public Octagon Box { get => _box; }
 
-        public Hitbox(int height, int width, Vector2 position)
+        public OctagonHitbox(int height, int width, Vector2 position)
         {
             _box = new Octagon(height, width, position);
         }
@@ -19,7 +19,7 @@
             return !_box.VirtualCorners[corner].Contains(point);
         }
 
-        public bool Hit(Hitbox box)
+        public bool Hit(OctagonHitbox box)
         {
             if (!BroadCheck(box.Box))
                 return false;
@@ -32,20 +32,26 @@
 
         public bool Hit(RectangleHitbox box)
         {
-            if (!BroadCheck((IShape)box.Box))
+            if (!BroadCheck(box.Box))
                 return false;
-            if (CheckHitbox((IShape)box.Box))
+            if (CheckHitbox(box.Box))
                 return true;
-            else return box.CheckHitbox((IShape)this._box);
+            else return box.CheckHitbox(this._box);
         }
 
         public bool CheckHitbox(IShape hitbox)
         {
-            //foreach (var point in hitbox.Corners)
-            //{
-            //    if (Hit(point))
-            //        return true;
-            //}
+            if (hitbox is Circle)
+            {
+                return false;
+            }
+
+            var box = hitbox as IPolygon;
+            foreach (var point in box.Corners)
+            {
+                if (Hit(point))
+                    return true;
+            }
             return false;
         }
 
@@ -60,7 +66,7 @@
             return 3;
         }
 
-        private bool Pierces(Hitbox box)
+        private bool Pierces(OctagonHitbox box)
         {
             if (box._box.Corners[2].X > this._box.Corners[2].X && box._box.Corners[7].X < this._box.Corners[7].X &&
                 box._box.Corners[1].Y > this._box.Corners[1].Y && box._box.Corners[4].Y < this._box.Corners[4].Y)

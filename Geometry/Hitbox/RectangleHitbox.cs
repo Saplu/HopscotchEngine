@@ -20,31 +20,36 @@ namespace Geometry
             return IsInside(point);
         }
 
-        public bool Hit(Hitbox hitbox)
+        public bool Hit(OctagonHitbox hitbox)
         {
-            if (!BroadCheck((IShape)hitbox.Box))
+            if (!BroadCheck(hitbox.Box))
                 return false;
-            if (CheckHitbox((IShape)hitbox.Box))
+            if (CheckHitbox(hitbox.Box))
                 return true;
-            else return hitbox.CheckHitbox((IShape)this._box);
+            else return hitbox.CheckHitbox(this._box);
         }
 
         public bool Hit(RectangleHitbox hitbox)
         {
-            if (!BroadCheck((IShape)hitbox.Box))
+            if (!BroadCheck(hitbox.Box))
                 return false;
-            if (CheckHitbox((IShape)hitbox._box))
+            if (CheckHitbox(hitbox._box))
                 return true;
-            return hitbox.CheckHitbox((IShape)this._box);
+            return hitbox.CheckHitbox(this._box);
         }
 
         public bool CheckHitbox(IShape hitbox)
         {
-            //foreach (var point in hitbox.Corners)
-            //{
-            //    if (isInside(point))
-            //        return true;
-            //}
+            if (hitbox is Circle)
+            {
+                return false;
+            }
+            var box = hitbox as IPolygon;
+            foreach (var point in box.Corners)
+            {
+                if (IsInside(point))
+                    return true;
+            }
             return false;
         }
 

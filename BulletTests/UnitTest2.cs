@@ -10,7 +10,7 @@ namespace BulletTests
     public class UnitTest2
     {
         
-        Hitbox hitbox = new Hitbox(100, 100, new Vector2(100, 100));
+        OctagonHitbox hitbox = new OctagonHitbox(100, 100, new Vector2(100, 100));
 
         [TestMethod]
         public void TestMethod1()
@@ -26,7 +26,7 @@ namespace BulletTests
         [TestMethod]
         public void TestMethod2()
         {
-            Hitbox testbox = new Hitbox(20, 20, new Vector2(150, 60));
+            OctagonHitbox testbox = new OctagonHitbox(20, 20, new Vector2(150, 60));
 
             bool actual = hitbox.Hit(testbox);
 
