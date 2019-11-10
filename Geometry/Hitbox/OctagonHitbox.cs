@@ -1,10 +1,10 @@
 ﻿namespace Geometry
 {
-    public class OctagonHitbox : IHitbox
+    public class OctagonHitbox : IPolygonHitbox
     {
         Octagon _box;
 
-        public Octagon Box { get => _box; }
+        public IPolygon Box { get => _box; }
 
         public OctagonHitbox(int height, int width, Vector2 position)
         {
@@ -18,19 +18,7 @@
             var corner = CheckCorner(point);
             return !_box.VirtualCorners[corner].Contains(point);
         }
-
-        public bool Hit(OctagonHitbox box)
-        {
-            if (!BroadCheck(box.Box))
-                return false;
-            if (CheckHitbox(box.Box))
-                return true;
-            if (box.CheckHitbox(this.Box))
-                return true;
-            return Pierces(box);
-        }
-
-        public bool Hit(RectangleHitbox box)
+        public bool Hit(IPolygonHitbox box)
         {
             if (!BroadCheck(box.Box))
                 return false;

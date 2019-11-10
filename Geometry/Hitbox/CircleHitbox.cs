@@ -23,7 +23,7 @@ namespace Geometry
             return false;
         }
 
-        public bool Hit(OctagonHitbox box)
+        public bool Hit(IPolygonHitbox box)
         {
             var checkpoint = _box.FindClosestPoint(box.Box.Position);
             if (BroadCheck(box.Box))
@@ -36,20 +36,33 @@ namespace Geometry
             }
             return false;
         }
+        //public bool Hit(OctagonHitbox box)
+        //{
+        //    var checkpoint = _box.FindClosestPoint(box.Box.Position);
+        //    if (BroadCheck(box.Box))
+        //    {
+        //        if (box.Hit(checkpoint))
+        //            return true;
+        //        foreach (var corner in box.Box.Corners)
+        //            if (Hit(corner))
+        //                return true;
+        //    }
+        //    return false;
+        //}
 
-        public bool Hit(RectangleHitbox box)
-        {
-            var checkpoint = _box.FindClosestPoint(box.Box.Position);
-            if (BroadCheck(box.Box))
-            {
-                if (box.Hit(checkpoint))
-                    return true;
-                foreach (var corner in box.Box.Corners)
-                    if (Hit(corner))
-                        return true;
-            }
-            return false;
-        }
+        //public bool Hit(RectangleHitbox box)
+        //{
+        //    var checkpoint = _box.FindClosestPoint(box.Box.Position);
+        //    if (BroadCheck(box.Box))
+        //    {
+        //        if (box.Hit(checkpoint))
+        //            return true;
+        //        foreach (var corner in box.Box.Corners)
+        //            if (Hit(corner))
+        //                return true;
+        //    }
+        //    return false;
+        //}
 
         public bool Hit(CircleHitbox box)
         {

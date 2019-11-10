@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Geometry
 {
-    public class RectangleHitbox : IHitbox
+    public class RectangleHitbox : IPolygonHitbox
     {
         Rectangle _box;
 
-        public Rectangle Box { get => _box; }
+        public IPolygon Box { get => _box; }
 
         public RectangleHitbox(int height, int width, Vector2 position, int angle)
         {
@@ -19,23 +19,13 @@ namespace Geometry
         {
             return IsInside(point);
         }
-
-        public bool Hit(OctagonHitbox hitbox)
+        public bool Hit(IPolygonHitbox box)
         {
-            if (!BroadCheck(hitbox.Box))
+            if (!BroadCheck(box.Box))
                 return false;
-            if (CheckHitbox(hitbox.Box))
+            if (CheckHitbox(box.Box))
                 return true;
-            else return hitbox.CheckHitbox(this._box);
-        }
-
-        public bool Hit(RectangleHitbox hitbox)
-        {
-            if (!BroadCheck(hitbox.Box))
-                return false;
-            if (CheckHitbox(hitbox._box))
-                return true;
-            return hitbox.CheckHitbox(this._box);
+            else return box.CheckHitbox(this._box);
         }
 
         public bool Hit(CircleHitbox hitbox)

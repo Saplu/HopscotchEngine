@@ -6,6 +6,7 @@ namespace Geometry
     public class Triangle : IPolygon
     {
         List<Vector2> _corners;
+        Vector2 _position;
         double _maxX, _minX, _maxY, _minY;
 
         public List<Vector2> Corners { get => _corners; set => _corners = CheckValue(value); }
@@ -13,7 +14,7 @@ namespace Geometry
         public double MinX { get => _minX; }
         public double MaxY { get => _maxY; }
         public double MinY { get => _minY; }
-        public Vector2 Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Vector2 Position { get => _position; set => SetPosition(value); }
 
         public Triangle(Vector2 c1, Vector2 c2, Vector2 c3)
         {
@@ -23,6 +24,7 @@ namespace Geometry
             }
             else throw new Exception("Triangle must have three different corners.");
             SetMaxMinValues();
+            SetPosition();
         }
 
         public bool Contains(Vector2 point)
@@ -70,6 +72,24 @@ namespace Geometry
                 if (corner.Y > _maxY)
                     _maxY = corner.Y;
             }
+        }
+
+        private void SetPosition()
+        {
+            var x = (_corners[0].X + _corners[1].X + _corners[2].X) / 3;
+            var y = (_corners[0].Y + _corners[1].Y + _corners[2].Y) / 3;
+            _position = new Vector2(x, y);
+        }
+
+        private void SetPosition(Vector2 position)
+        {
+            foreach(var corner in _corners)
+            {
+                corner.X += _position.X - position.X;
+                corner.Y += _position.Y - position.Y;
+            }
+            _position = position;
+            SetMaxMinValues();
         }
     }
 }
