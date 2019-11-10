@@ -38,19 +38,29 @@ namespace Geometry
             return hitbox.CheckHitbox(this._box);
         }
 
-        public bool CheckHitbox(IShape hitbox)
+        public bool Hit(CircleHitbox hitbox)
         {
-            if (hitbox is Circle)
-            {
+            if (!BroadCheck(hitbox.Box))
                 return false;
-            }
-            var box = hitbox as IPolygon;
-            foreach (var point in box.Corners)
+            if (CheckHitbox(hitbox.Box))
+                return true;
+            else return hitbox.CheckHitbox(this._box);
+        }
+
+        public bool CheckHitbox(IPolygon hitbox)
+        {
+            foreach (var point in hitbox.Corners)
             {
                 if (IsInside(point))
                     return true;
             }
             return false;
+        }
+
+        public bool CheckHitbox(ICircle circle)
+        {
+            var checkpoint = circle.FindClosestPoint(_box.Position);
+            return Hit(checkpoint);
         }
 
         private bool IsInside(Vector2 point)

@@ -39,20 +39,29 @@
             else return box.CheckHitbox(this._box);
         }
 
-        public bool CheckHitbox(IShape hitbox)
+        public bool Hit(CircleHitbox box)
         {
-            if (hitbox is Circle)
-            {
+            if (!BroadCheck(box.Box))
                 return false;
-            }
+            if (CheckHitbox(box.Box))
+                return true;
+            else return box.CheckHitbox(this._box);
+        }
 
-            var box = hitbox as IPolygon;
-            foreach (var point in box.Corners)
+        public bool CheckHitbox(IPolygon hitbox)
+        {
+            foreach (var point in hitbox.Corners)
             {
                 if (Hit(point))
                     return true;
             }
             return false;
+        }
+
+        public bool CheckHitbox(ICircle circle)
+        {
+            var checkpoint = circle.FindClosestPoint(_box.Position);
+            return Hit(checkpoint);
         }
 
         private int CheckCorner(Vector2 point)

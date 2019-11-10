@@ -18,34 +18,71 @@ namespace Geometry
         public bool Hit(Vector2 point)
         {
             var range = new RangeChecker();
-            if (_box.Radius <= range.CheckRange(_box.Position, point))
+            if (_box.Radius >= range.CheckRange(_box.Position, point))
                 return true;
             return false;
         }
 
         public bool Hit(OctagonHitbox box)
         {
-            throw new NotImplementedException();
+            var checkpoint = _box.FindClosestPoint(box.Box.Position);
+            if (BroadCheck(box.Box))
+            {
+                if (box.Hit(checkpoint))
+                    return true;
+                foreach (var corner in box.Box.Corners)
+                    if (Hit(corner))
+                        return true;
+            }
+            return false;
         }
 
         public bool Hit(RectangleHitbox box)
         {
-            throw new NotImplementedException();
+            var checkpoint = _box.FindClosestPoint(box.Box.Position);
+            if (BroadCheck(box.Box))
+            {
+                if (box.Hit(checkpoint))
+                    return true;
+                foreach (var corner in box.Box.Corners)
+                    if (Hit(corner))
+                        return true;
+            }
+            return false;
         }
 
-        public bool CheckHitbox(IShape box)
+        public bool Hit(CircleHitbox box)
         {
-            throw new NotImplementedException();
+            var rc = new RangeChecker();
+            if (rc.CheckRange(box.Box.Position, this._box.Position) <= box.Box.Radius + this._box.Radius)
+                return true;
+            return false;
         }
 
-        public Vector2 FindClosestPoint(Vector2 point)
+        public bool CheckHitbox(IPolygon hitbox)
         {
-            var vX = point.X - _box.Position.X;
-            var vY = point.Y - _box.Position.Y;
-            var magV = Math.Sqrt(vX * vX + vY * vY);
-            var aX = _box.Position.X + vX / magV * Box.Radius;
-            var aY = _box.Position.Y + vY / magV * Box.Radius;
-            return new Vector2(aX, aY);
+            foreach (var point in hitbox.Corners)
+            {
+                if (Hit(point))
+                    return true;
+            }
+            return false;
+        }
+
+        public bool CheckHitbox(ICircle circle)
+        {
+            var rc = new RangeChecker();
+            if (rc.CheckRange(circle.Position, this._box.Position) <= circle.Radius + this._box.Radius)
+                return true;
+            return false;
+        }
+
+        private bool BroadCheck(IShape shape)
+        {
+            if (shape.MaxX < this._box.MinX || shape.MinX > this._box.MaxX ||
+                shape.MaxY < this._box.MinY || shape.MinY > this._box.MaxY)
+                return false;
+            return true;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Geometry
 {
-    public class Circle : IShape
+    public class Circle : ICircle
     {
         double _maxX, _minX, _maxY, _minY, _radius;
         Vector2 _position;
@@ -20,6 +20,15 @@ namespace Geometry
             this._position = position;
             this._radius = radius;
             GetMaxMinValues();
+        }
+        public Vector2 FindClosestPoint(Vector2 point)
+        {
+            var vX = point.X - _position.X;
+            var vY = point.Y - _position.Y;
+            var magV = Math.Sqrt(vX * vX + vY * vY);
+            var aX = _position.X + vX / magV * _radius;
+            var aY = _position.Y + vY / magV * _radius;
+            return new Vector2(aX, aY);
         }
 
         private void SetRadius(double value)

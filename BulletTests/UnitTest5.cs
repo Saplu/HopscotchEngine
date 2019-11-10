@@ -47,7 +47,7 @@ namespace BulletTests
         [TestMethod]
         public void TestMethod5()
         {
-            var actual = box2.CheckHitbox(new Circle(new Vector2(10, 10), 100));
+            var actual = box2.CheckHitbox(new Circle(new Vector2(251, 100), 100));
 
             Assert.AreEqual(false, actual);
         }
