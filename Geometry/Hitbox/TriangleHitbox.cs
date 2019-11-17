@@ -14,6 +14,7 @@ namespace Geometry.Hitbox
         {
             _box = new Triangle(c1, c2, c3);
         }
+
         public bool Hit(Vector2 point)
         {
             return _box.Contains(point);

@@ -21,7 +21,7 @@ namespace Geometry
             this._radius = radius;
             GetMaxMinValues();
         }
-        public Vector2 FindClosestPoint(Vector2 point)
+        public virtual Vector2 FindClosestPoint(Vector2 point)
         {
             var vX = point.X - _position.X;
             var vY = point.Y - _position.Y;
