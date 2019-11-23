@@ -7,10 +7,12 @@ namespace Geometry.Tiles
 {
     public class Tile
     {
-        int _width, _height, _id, _left, _right;
+        int _width, _height, _id, _left, _right, _leftSide, _rightSide;
         List<Vector2> _corners;
         List<TriangleHitbox> _hitbox;
-        Vector2 _position;
+        Vector2 _position, _leftVector, _rightVector;
+
+        public List<TriangleHitbox> Hitbox { get => _hitbox; set => _hitbox = value; }
 
         public Tile(int left, int right, int id)
         {
@@ -22,12 +24,14 @@ namespace Geometry.Tiles
             CalculatePosition();
             CalculateCorners();
             CheckSameSide();
+            _leftVector = CalculateSideVector(_left);
+            _rightVector = CalculateSideVector(_right);
             CalculateHitboxes();
         }
 
         private int CheckValue(int value)
         {
-            if (value < 0 || value > 127)
+            if (value < 0 || value >= _width * 2 + _height * 2)
                 throw new ArgumentOutOfRangeException("Value must be between 0 and 127.");
             return value;
         }
@@ -50,20 +54,25 @@ namespace Geometry.Tiles
 
         private void CheckSameSide()
         {
-            if (_left < 33 && _right < 33 || _left > 32 && _left < 65 && _right > 32 && _right < 65 ||
-                _left > 64 && _left < 97 && _right > 64 && _right < 97 || _left > 96 && _right > 96)
+            _leftSide = GetSide(_left);
+            _rightSide = GetSide(_right);
+            if (_leftSide == _rightSide)
                 throw new Exception("Both endings cannot be on the same side.");
         }
 
         private void CalculateHitboxes()
         {
-            var leftSide = GetSide(_left);
-            var rightSide = GetSide(_right);
-            var corners = GetCornersBetween(leftSide, rightSide);
-
+            _hitbox = new List<TriangleHitbox>();
+            var corners = new List<Vector2>() { _rightVector, _leftVector };
+            corners.AddRange(GetCornersBetween(_leftSide, _rightSide));
+            for (int i = 2; i < corners.Count; i++)
+            {
+                var box = new TriangleHitbox(_rightVector, corners[i - 1], corners[i]);
+                _hitbox.Add(box);
+            }
         }
 
-        public List<Vector2> GetCornersBetween(int leftSide, int rightSide)
+        private List<Vector2> GetCornersBetween(int leftSide, int rightSide)
         {
             var list = new List<Vector2>();
             var i = leftSide;
@@ -80,10 +89,20 @@ namespace Geometry.Tiles
 
         private int GetSide(int point)
         {
-            if (point < 33) return 0;
-            else if (point < 65) return 1;
-            else if (point < 97) return 2;
+            if (point < _width) return 0;
+            else if (point < _width + _height) return 1;
+            else if (point < _width * 2 + _height) return 2;
             else return 3;
+        }
+        private Vector2 CalculateSideVector(int position)
+        {
+            if (position <= _width)
+                return new Vector2(_position.X + position, _position.Y);
+            if (position <= _width + _height)
+                return new Vector2(_position.X + _width, _position.Y + position - _width);
+            if (position <= _width * 2 + _height)
+                return new Vector2(_position.X + _width - (position - _width - _height), _position.Y + _height);
+            else return new Vector2(_position.X, _position.Y + (position - _width * 2 - _height));
         }
     }
 }
