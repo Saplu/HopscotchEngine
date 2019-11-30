@@ -9,10 +9,10 @@ namespace Geometry.Tiles
     {
         int _width, _height, _id, _left, _right, _leftSide, _rightSide;
         List<Vector2> _corners;
-        List<TriangleHitbox> _hitbox;
+        List<IHitbox> _hitbox;
         Vector2 _position, _leftVector, _rightVector;
 
-        public List<TriangleHitbox> Hitbox { get => _hitbox; set => _hitbox = value; }
+        public List<IHitbox> Hitbox { get => _hitbox; }
 
         public Tile(int left, int right, int id)
         {
@@ -27,6 +27,23 @@ namespace Geometry.Tiles
             _leftVector = CalculateSideVector(_left);
             _rightVector = CalculateSideVector(_right);
             CalculateHitboxes();
+        }
+
+        public Tile(int premade, int id)
+        {
+            _width = 32;
+            _height = 32;
+            _id = id;
+            CalculatePosition();
+            CalculateCorners();
+            _hitbox = new List<IHitbox>();
+            switch(premade)
+            {
+                case 1: FullTile(); break;
+                case 2: UpHill(); break;
+                case 3: DownHill(); break;
+                default: throw new ArgumentOutOfRangeException("Try better.");
+            }
         }
 
         private int CheckValue(int value)
@@ -62,7 +79,7 @@ namespace Geometry.Tiles
 
         private void CalculateHitboxes()
         {
-            _hitbox = new List<TriangleHitbox>();
+            _hitbox = new List<IHitbox>();
             var corners = new List<Vector2>() { _rightVector, _leftVector };
             corners.AddRange(GetCornersBetween(_leftSide, _rightSide));
             for (int i = 2; i < corners.Count; i++)
@@ -103,6 +120,21 @@ namespace Geometry.Tiles
             if (position <= _width * 2 + _height)
                 return new Vector2(_position.X + _width - (position - _width - _height), _position.Y + _height);
             else return new Vector2(_position.X, _position.Y + (position - _width * 2 - _height));
+        }
+
+        private void FullTile()
+        {
+            _hitbox.Add(new RectangleHitbox(_height, _width, _position, 0));
+        }
+
+        private void UpHill()
+        {
+            _hitbox.Add(new TriangleHitbox(_corners[3], _corners[1], _corners[2]));
+        }
+
+        private void DownHill()
+        {
+            _hitbox.Add(new TriangleHitbox(_corners[0], _corners[2], _corners[3]));
         }
     }
 }

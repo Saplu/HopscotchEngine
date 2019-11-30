@@ -51,5 +51,14 @@ namespace BulletTests
         {
             Tile tile3 = new Tile(100, 110, 0);
         }
+
+        [TestMethod]
+        public void FullTile()
+        {
+            Tile full = new Tile(1, 0);
+            var expected = new RectangleHitbox(32, 32, new Vector2(0, 0), 0);
+
+            Assert.AreEqual(expected, full.Hitbox[0]);
+        }
     }
 }

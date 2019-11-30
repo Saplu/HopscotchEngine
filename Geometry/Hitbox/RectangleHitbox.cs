@@ -69,52 +69,52 @@ namespace Geometry
             return BroadCheck(point);
         }
 
-        private Vector2[][] Getsides(RectangleHitbox hitbox)
-        {
-            var sides = new Vector2[4][]
-            {
-                new Vector2[]{hitbox._box.Corners[0], hitbox._box.Corners[1]},
-                new Vector2[]{hitbox._box.Corners[2], hitbox._box.Corners[3]},
-                new Vector2[]{hitbox._box.Corners[1], hitbox._box.Corners[3]},
-                new Vector2[]{hitbox._box.Corners[0], hitbox._box.Corners[2]}
-            };
-            return sides;
-        }
+        //private Vector2[][] Getsides(RectangleHitbox hitbox)
+        //{
+        //    var sides = new Vector2[4][]
+        //    {
+        //        new Vector2[]{hitbox._box.Corners[0], hitbox._box.Corners[1]},
+        //        new Vector2[]{hitbox._box.Corners[2], hitbox._box.Corners[3]},
+        //        new Vector2[]{hitbox._box.Corners[1], hitbox._box.Corners[3]},
+        //        new Vector2[]{hitbox._box.Corners[0], hitbox._box.Corners[2]}
+        //    };
+        //    return sides;
+        //}
 
-        private bool CheckY(Vector2[][] sides)
-        {
-            for (int i = 2; i < 3; i++)
-            {
-                if (sides[i][0].Y <= _box.Position.Y && sides[i][1].Y >= _box.Position.Y ||
-                    sides[i][0].Y <= _box.Position.Y + _box.Height && sides[i][1].Y >= _box.Position.Y + _box.Height ||
-                    sides[i][0].Y >= _box.Position.Y && sides[i][1].Y <= _box.Position.Y + _box.Height)
-                    return true;
-            }
-            return false;
-        }
+        //private bool CheckY(Vector2[][] sides)
+        //{
+        //    for (int i = 2; i < 3; i++)
+        //    {
+        //        if (sides[i][0].Y <= _box.Position.Y && sides[i][1].Y >= _box.Position.Y ||
+        //            sides[i][0].Y <= _box.Position.Y + _box.Height && sides[i][1].Y >= _box.Position.Y + _box.Height ||
+        //            sides[i][0].Y >= _box.Position.Y && sides[i][1].Y <= _box.Position.Y + _box.Height)
+        //            return true;
+        //    }
+        //    return false;
+        //}
 
-        private List<int> GetBorderValues(Rectangle box)
-        {
-            List<int> xValues = GetCornerValues(box.Corners, true);
-            List<int> yValues = GetCornerValues(box.Corners, false);
-            var list = new List<int>();
-            list.Add(xValues.Max());
-            list.Add(yValues.Max());
-            list.Add(xValues.Min());
-            list.Add(yValues.Min());
-            return list;
-        }
+        //private List<int> GetBorderValues(Rectangle box)
+        //{
+        //    List<int> xValues = GetCornerValues(box.Corners, true);
+        //    List<int> yValues = GetCornerValues(box.Corners, false);
+        //    var list = new List<int>();
+        //    list.Add(xValues.Max());
+        //    list.Add(yValues.Max());
+        //    list.Add(xValues.Min());
+        //    list.Add(yValues.Min());
+        //    return list;
+        //}
 
-        private List<int> GetCornerValues(List<Vector2> corners, bool isX)
-        {
-            var values = new List<int>();
-            if (isX)
-                foreach (var item in corners)
-                    values.Add(Convert.ToInt32(item.X));
-            else foreach (var item in corners)
-                    values.Add(Convert.ToInt32(item.Y));
-            return values;
-        }
+        //private List<int> GetCornerValues(List<Vector2> corners, bool isX)
+        //{
+        //    var values = new List<int>();
+        //    if (isX)
+        //        foreach (var item in corners)
+        //            values.Add(Convert.ToInt32(item.X));
+        //    else foreach (var item in corners)
+        //            values.Add(Convert.ToInt32(item.Y));
+        //    return values;
+        //}
 
         private bool BroadCheck(Vector2 point)
         {
@@ -130,6 +130,24 @@ namespace Geometry
                 shape.MaxY < this._box.MinY || shape.MinY > this._box.MaxY)
                 return false;
             else return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var toCompareWith = obj as RectangleHitbox;
+            if (toCompareWith == null)
+                return false;
+            if (toCompareWith.Box.Equals(this.Box))
+                return true;
+            else return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 623778965;
+            hashCode = hashCode * -1521134295 + EqualityComparer<Rectangle>.Default.GetHashCode(_box);
+            hashCode = hashCode * -1521134295 + EqualityComparer<IPolygon>.Default.GetHashCode(Box);
+            return hashCode;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BulletTests
         public void TestMethod1()
         {
             bool expected = true;
-            bool actual = box.Hit(new Vector2(140, 60));
+            bool actual = box.Hit(new Vector2(110, 150));
             Assert.AreEqual(expected, actual);
         }
 
@@ -38,7 +38,7 @@ namespace BulletTests
         [TestMethod]
         public void TestMethod4()
         {
-            var testBox = new RectangleHitbox(200, 200, new Vector2(200, 100), 0);
+            var testBox = new RectangleHitbox(200, 200, new Vector2(150, 100), 0);
             bool expected = true;
             bool actual = box2.Hit(testBox);
             Assert.AreEqual(expected, actual);
