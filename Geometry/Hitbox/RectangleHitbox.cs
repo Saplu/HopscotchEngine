@@ -137,9 +137,7 @@ namespace Geometry
             var toCompareWith = obj as RectangleHitbox;
             if (toCompareWith == null)
                 return false;
-            if (toCompareWith.Box.Equals(this.Box))
-                return true;
-            else return false;
+            return toCompareWith.Box.Equals(this.Box);
         }
 
         public override int GetHashCode()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Geometry
 {
@@ -90,6 +91,14 @@ namespace Geometry
             }
             _position = position;
             SetMaxMinValues();
+        }
+
+        public override bool Equals(object obj)
+        {
+            var toCompareWith = obj as Triangle;
+            if (toCompareWith == null)
+                return false;
+            return _corners.SequenceEqual(toCompareWith._corners);
         }
     }
 }

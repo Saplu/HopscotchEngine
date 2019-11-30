@@ -60,5 +60,21 @@ namespace Geometry.Hitbox
                 return false;
             else return true;
         }
+
+        public override bool Equals(object obj)
+        {
+            var toCompareWith = obj as TriangleHitbox;
+            if (toCompareWith == null)
+                return false;
+            return toCompareWith.Box.Equals(Box);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 623778965;
+            hashCode = hashCode * -1521134295 + EqualityComparer<Triangle>.Default.GetHashCode(_box);
+            hashCode = hashCode * -1521134295 + EqualityComparer<IPolygon>.Default.GetHashCode(Box);
+            return hashCode;
+        }
     }
 }

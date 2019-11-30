@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geometry.Tiles
+namespace Geometry.Map
 {
     public class Tile
     {
@@ -11,8 +11,12 @@ namespace Geometry.Tiles
         List<Vector2> _corners;
         List<IHitbox> _hitbox;
         Vector2 _position, _leftVector, _rightVector;
+        double _angle;
 
         public List<IHitbox> Hitbox { get => _hitbox; }
+        public Vector2 Position { get => _position; set => _position = value; }
+        public double Angle { get => _angle; set => _angle = value; }
+        public int Id { get => _id; set => _id = value; }
 
         public Tile(int left, int right, int id)
         {
@@ -27,6 +31,7 @@ namespace Geometry.Tiles
             _leftVector = CalculateSideVector(_left);
             _rightVector = CalculateSideVector(_right);
             CalculateHitboxes();
+            CalculateAngle();
         }
 
         public Tile(int premade, int id)
@@ -48,14 +53,19 @@ namespace Geometry.Tiles
 
         private int CheckValue(int value)
         {
-            if (value < 0 || value >= _width * 2 + _height * 2)
-                throw new ArgumentOutOfRangeException("Value must be between 0 and 127.");
+            var max = _width * 2 + _height * 2;
+            if (value < 0 || value >= max)
+                throw new ArgumentOutOfRangeException(String.Format("Value must be between 0 and {0}.", max));
             return value;
         }
 
         private void CalculatePosition()
         {
-            _position = new Vector2(0, 0);
+            var row = _id / 25;
+            var column = _id % 25;
+            var x = column * _width;
+            var y = row * _height;
+            _position = new Vector2(x, y);
         }
 
         private void CalculateCorners()
@@ -119,22 +129,33 @@ namespace Geometry.Tiles
                 return new Vector2(_position.X + _width, _position.Y + position - _width);
             if (position <= _width * 2 + _height)
                 return new Vector2(_position.X + _width - (position - _width - _height), _position.Y + _height);
-            else return new Vector2(_position.X, _position.Y + (position - _width * 2 - _height));
+            else return new Vector2(_position.X, _position.Y + (_width * 2 + _height * 2 - position));
+        }
+
+        private void CalculateAngle()
+        {
+            var yDiff = _leftVector.Y - _rightVector.Y;
+            var xDiff = _rightVector.X - _leftVector.X;
+            var rad = Math.Atan2(yDiff, xDiff);
+            _angle = rad * (180 / Math.PI);
         }
 
         private void FullTile()
         {
             _hitbox.Add(new RectangleHitbox(_height, _width, _position, 0));
+            _angle = 0;
         }
 
         private void UpHill()
         {
             _hitbox.Add(new TriangleHitbox(_corners[3], _corners[1], _corners[2]));
+            _angle = 45;
         }
 
         private void DownHill()
         {
             _hitbox.Add(new TriangleHitbox(_corners[0], _corners[2], _corners[3]));
+            _angle = 135;
         }
     }
 }
