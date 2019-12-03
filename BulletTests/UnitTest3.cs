@@ -11,7 +11,7 @@ namespace BulletTests
         [TestMethod]
         public void TestMethod1()
         {
-            RectangleHitbox testBox = new RectangleHitbox(10, 1000, new Vector2(0, 150), 0);
+            RectangleHitbox testBox = new RectangleHitbox(10, 1000, new Vector2(0, 100), 0);
 
             bool actual = hb.Hit(testBox);
 

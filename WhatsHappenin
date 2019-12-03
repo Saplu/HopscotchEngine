@@ -1,6 +1,4 @@
 Elikkäs 2D tasohyppely. Mahdollisesti kuulaa juokseen siihen mukaan.
-Noita libraryjä varmasti kuulus yhdistellä ja ainaki uudelleennimetä.
-bulletsysteemi on viä raakasti kesken, mutta kivasti masterissa silti :D
 
 Juuso:
 Ainaski renderöinti ja arkkitehtipuoli
@@ -9,8 +7,6 @@ Halti:
 Etenkin Juuson määrittelemien palasten tekeminen.
 Kentän määritelmä. Jonkinlainen luokka kentästä. Tilesysteemi jotenkin. Miten saa tileistä kaltevia tasoja?
 Pitää pystyä piirtämään ja sisältää riittävät tiedot miten pelaaja pystyy liikkumaan siinä.
-Tausta erikseen, tilet ainoastaan erityisasioille.
-Tilelle tiätty oma luokka.
 
 Spritet. Miten piirretään? Tämä lienee enempi Juuson juttuja.
 Spritesheet käyttöön?

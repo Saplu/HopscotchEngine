@@ -83,23 +83,22 @@ namespace Geometry
         private List<Vector2> CalculateCorners(int angle)
         {
             if (angle == 0)
-                _corners = new List<Vector2>() { new Vector2(_position.X - _width / 2, _position.Y - _height / 2),
-                    new Vector2(_position.X + _width / 2, _position.Y - _height / 2), new Vector2(_position.X - _width / 2, _position.Y + _height / 2),
-                    new Vector2(_position.X + _width / 2, _position.Y + _height / 2)};
+                _corners = new List<Vector2>() { new Vector2(_position.X, _position.Y),
+                    new Vector2(_position.X + _width, _position.Y), new Vector2(_position.X + _width, _position.Y + _height),
+                    new Vector2(_position.X, _position.Y + _height)};
             else
             {
                 _corners = new List<Vector2>();
                 for (int i = 0; i < 4; i++)
                 {
-                    
                     double tempX = 0;
                     double tempY = 0;
-                    if (i == 0 || i == 2)
-                        tempX = (_position.X - _width / 2) - _position.X;
-                    else tempX = (_position.X + _width / 2) -_position.X;
+                    if (i == 0 || i == 3)
+                        tempX = (_position.X) - _position.X;
+                    else tempX = (_position.X + _width) -_position.X;
                     if (i == 0 || i == 1)
-                        tempY = (_position.Y - _width / 2) - _position.Y;
-                    else tempY = (_position.Y + _width / 2) - _position.Y;
+                        tempY = (_position.Y) - _position.Y;
+                    else tempY = (_position.Y + _width) - _position.Y;
                    
                     double rotatedX = (tempX * Math.Cos(angle * Math.PI/180)) - (tempY * Math.Sin(angle * Math.PI/180));
                     double rotatedY = (tempX * Math.Sin(angle * Math.PI/180)) + (tempY * Math.Cos(angle * Math.PI/180));
@@ -112,10 +111,10 @@ namespace Geometry
 
         private Vector2 CheckValue(Vector2 value)
         {
-            if (value.X < _width / 2)
-                value.X = Convert.ToInt32(_width / 2);
-            if (value.Y < _height / 2)
-                value.Y = Convert.ToInt32(_height / 2);
+            if (value.X < 0)
+                value.X = 0;
+            if (value.Y < 0)
+                value.Y = 0;
             return value;
         }
 

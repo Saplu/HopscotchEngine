@@ -73,6 +73,7 @@
     <Compile Include="RangeTests.cs" />
     <Compile Include="CircleTests.cs" />
     <Compile Include="TileTests.cs" />
+    <Compile Include="MapTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
