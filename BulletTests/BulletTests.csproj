@@ -80,9 +80,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameObjects\GameObjects.csproj">
+      <Project>{aaade9d6-f7ee-4955-b019-eb92e49bc1e9}</Project>
+      <Name>GameObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Geometry\Geometry.csproj">
       <Project>{74A49385-D4B1-442C-8646-53F012A9D4D6}</Project>
       <Name>Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Input\Input.csproj">
+      <Project>{78e9b1ac-3d7b-49b3-8dc3-57ad9a9e27bd}</Project>
+      <Name>Input</Name>
     </ProjectReference>
     <ProjectReference Include="..\Physics\Physics.csproj">
       <Project>{1f6e5d44-c997-486a-a1be-2b64d0f4af32}</Project>

@@ -25,7 +25,8 @@ namespace Rendering
         {
             window.DispatchEvents();
 
-            //var texture = new Texture("Untitled.png");
+            //var texture = new Texture("Untitled.png"); Jostain syystä tää ei toiminu mulla, heitti exceptionia.
+            // Tein itelleni toimivalla tavalla tuonne ylöspäi^
 
             pos.X += 5;
             pos.Y += 5;
