@@ -8,7 +8,6 @@ namespace GameObjects
     {
         Dictionary<int, Tile> _tiles;
         Player _player;
-        //Texture2D _background;
 
         public Dictionary<int, Tile> Tiles { get => _tiles; }
 
@@ -22,7 +21,5 @@ namespace GameObjects
         {
             Tiles[tile.Id] = tile;
         }
-
-        //Tämä lienee presentationlayershittiä. Että Draw()it sun muut kuulunee tänne?
     }
 }
