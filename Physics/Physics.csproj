@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameTime.cs" />
     <Compile Include="Gravity.cs" />
     <Compile Include="IGravity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

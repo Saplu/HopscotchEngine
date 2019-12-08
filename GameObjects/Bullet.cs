@@ -3,9 +3,9 @@ using System;
 using Physics;
 
 
-namespace BulletClassLibrary
+namespace GameObjects
 {
-    public class Bullet : ISolidObject
+    public class Bullet
     {
         Vector2 _position, _speed;
         Gravity _gravity;
@@ -30,16 +30,6 @@ namespace BulletClassLibrary
             _gravity.Update(_speed.Y, _active, milliseconds);
             _position.Update(_speed.X, _speed.Y);
             //Sitten collision checkiä, activen mahdollinen muutos osumasta.
-        }
-
-        public bool Hit(ISolidObject solid)
-        {
-            return false;
-        }
-
-        public bool Hit(IImmaterialObject immaterial)
-        {
-            return false;
         }
 
         private void CalculateSpeed()

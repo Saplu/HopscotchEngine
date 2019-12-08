@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geometry.Map
+namespace GameObjects
 {
     public class Map
     {
         Dictionary<int, Tile> _tiles;
+        Player _player;
         //Texture2D _background;
 
         public Dictionary<int, Tile> Tiles { get => _tiles; }
@@ -14,6 +15,7 @@ namespace Geometry.Map
         public Map()
         {
             _tiles = new Dictionary<int, Tile>();
+            _player = new Player();
         }
 
         public void AddOrUpdateTile(Tile tile)

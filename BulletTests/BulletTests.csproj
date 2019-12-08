@@ -80,10 +80,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BulletClassLibrary2\BulletClassLibrary.csproj">
-      <Project>{0608c0e9-1e53-41ce-976d-f74a64b77cd9}</Project>
-      <Name>BulletClassLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Geometry\Geometry.csproj">
       <Project>{74A49385-D4B1-442C-8646-53F012A9D4D6}</Project>
       <Name>Geometry</Name>

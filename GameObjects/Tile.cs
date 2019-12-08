@@ -2,8 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Geometry;
 
-namespace Geometry.Map
+namespace GameObjects
 {
     public class Tile
     {
