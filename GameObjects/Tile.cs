@@ -18,6 +18,8 @@ namespace GameObjects
         public Vector2 Position { get => _position; set => _position = value; }
         public double Angle { get => _angle; set => _angle = value; }
         public int Id { get => _id; set => _id = value; }
+        public int Width { get => _width; set => _width = value; }
+        public int Height { get => _height; set => _height = value; }
 
         public Tile(int left, int right, int id)
         {
