@@ -11,17 +11,15 @@ namespace Rendering
     public class SFMLRenderer : IRenderer
     {
         List<(Keyboard.Key, Action)> registered = new List<(Keyboard.Key, Action)>();
-        Texture texture = new Texture(Path.GetFullPath("Untitled.png"));
-        Vector2f pos = new Vector2f(10, 50);
-        PresentationMap map = new PresentationMap(new Texture(Path.GetFullPath("Untitled.png")));
+        PresentationMap map = new PresentationMap(new Texture(Path.GetFullPath("Untitled.png")), 
+            new Texture(Path.GetFullPath("background.png")), new Texture(Path.GetFullPath("Player.png")));
         RenderStates ts = new RenderStates();
 
         RenderWindow window;
         public void Init()
         {
-            window = new RenderWindow(new VideoMode(800, 600), "Window");
+            window = new RenderWindow(new VideoMode(800, 480), "Window");
             window.KeyPressed += KeyPressed;
-            var sprite = new Sprite(texture);
         }
 
         public void Update()
@@ -30,15 +28,9 @@ namespace Rendering
 
             //var texture = new Texture("Untitled.png"); Jostain syystä tää ei toiminu mulla, heitti exceptionia.
             // Tein itelleni toimivalla tavalla tuonne ylöspäi^
+            map.Update(20);
 
-            pos.X += 5;
-            pos.Y += 5;
-
-            var sprite = new Sprite(texture);
-            //sprite.Position = new Vector2f(10, 50);
-            sprite.Position = pos;
             window.Clear(Color.Black);
-            window.Draw(sprite);
             map.Draw(window, ts);
 
             window.Display();

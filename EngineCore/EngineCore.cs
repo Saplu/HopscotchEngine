@@ -18,7 +18,7 @@ namespace EngineCore
 
             while (true)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(20);
                 rend.Update();
             }
         }

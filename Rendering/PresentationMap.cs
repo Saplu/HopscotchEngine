@@ -7,32 +7,43 @@ using SFML.System;
 
 namespace Rendering
 {
-    public class PresentationMap : SFML.Graphics.Drawable
+    public class PresentationMap : Drawable
     {
         Map _map;
-        Texture _tileTexture;
-        Sprite _sprite;
+        Texture _tileTexture, _background, _playerTexture;
+        Sprite _bgs, _playerSprite;
 
-        public PresentationMap(Texture texture)
+        public PresentationMap(Texture tileTexture, Texture backgroundTexture, Texture playerTexture)
         {
             _map = new Map();
-            _map.AddOrUpdateTile(new Tile(1, 4));
-            _map.AddOrUpdateTile(new Tile(1, 9));
-            _map.AddOrUpdateTile(new Tile(1, 39));
-            _tileTexture = texture;
-            _sprite = new Sprite(_tileTexture);
+            _tileTexture = tileTexture;
+            _background = backgroundTexture;
+            _playerTexture = playerTexture;
+            _bgs = new Sprite(_background);
+            _bgs.TextureRect = new IntRect(new Vector2i(0, 0), new Vector2i(800, 480));
+            _bgs.Position = new Vector2f(0, 0);
+            _playerSprite = new Sprite(_playerTexture, new IntRect(0, 0, 32, 32));
+            _playerSprite.Position = new Vector2f((float)_map.Player.Position.X, (float)_map.Player.Position.Y);
+        }
+
+        public void Update(int milliseconds)
+        {
+            _map.Update(milliseconds);
+            _playerSprite.Position = new Vector2f((float)_map.Player.Position.X, (float)_map.Player.Position.Y);
         }
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            foreach (var item in _map.Tiles)
+            target.Draw(_bgs);
+            foreach(Tile tile in _map)
             {
-                var tile = new Sprite(_tileTexture);
-                tile.TextureRect = new IntRect(new Vector2i(Convert.ToInt32(item.Value.Position.X),
-                    Convert.ToInt32(item.Value.Position.Y)), new Vector2i(32, 32));
-                tile.Position = new Vector2f((float)item.Value.Position.X, (float)item.Value.Position.Y);
-                target.Draw(tile);
+                var sprite = new Sprite(_tileTexture);
+                sprite.Rotation = (float)tile.Angle;
+                sprite.TextureRect = new IntRect(new Vector2i((int)tile.Position.X, (int)tile.Position.Y), new Vector2i(32, 32));
+                sprite.Position = new Vector2f((float)tile.Position.X, (float)tile.Position.Y);
+                target.Draw(sprite);
             }
+            target.Draw(_playerSprite);
         }
     }
 }

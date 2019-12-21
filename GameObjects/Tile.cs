@@ -152,13 +152,13 @@ namespace GameObjects
         private void UpHill()
         {
             _hitbox.Add(new TriangleHitbox(_corners[3], _corners[1], _corners[2]));
-            _angle = 45;
+            _angle = 135;
         }
 
         private void DownHill()
         {
             _hitbox.Add(new TriangleHitbox(_corners[0], _corners[2], _corners[3]));
-            _angle = 135;
+            _angle = 45;
         }
     }
 }

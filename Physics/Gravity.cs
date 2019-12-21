@@ -26,7 +26,7 @@ namespace Physics
             {
                 if (milliseconds < 0)
                     throw new ArgumentOutOfRangeException("Time cannot run backwards here.");
-                currentSpeed += _acceleration * (double)(milliseconds / 1000);
+                currentSpeed += _acceleration * ((double)milliseconds / (double)1000);
                 if (currentSpeed > _maxSpeed)
                     currentSpeed = _maxSpeed;
                 return currentSpeed;
