@@ -14,6 +14,7 @@ namespace Rendering
         PresentationMap map = new PresentationMap(new Texture(Path.GetFullPath("Untitled.png")), 
             new Texture(Path.GetFullPath("background.png")), new Texture(Path.GetFullPath("Player.png")));
         RenderStates ts = new RenderStates();
+        GameTime gameTime = new GameTime();
 
         RenderWindow window;
         public void Init()
@@ -28,7 +29,8 @@ namespace Rendering
 
             //var texture = new Texture("Untitled.png"); Jostain syystä tää ei toiminu mulla, heitti exceptionia.
             // Tein itelleni toimivalla tavalla tuonne ylöspäi^
-            map.Update(20);
+            gameTime.Update();
+            map.Update(Convert.ToInt32(gameTime.SinceLastUpdate));
 
             window.Clear(Color.Black);
             map.Draw(window, ts);

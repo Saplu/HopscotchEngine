@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Physics
+namespace Rendering
 {
-    public static class GameTime
+    public class GameTime
     {
         static TimeSpan _totalGameTime, _sinceLastUpdate;
         static DateTime _startTime, _previousUpdateTime;
 
-        public static TimeSpan TotalGameTime { get => _totalGameTime; set => _totalGameTime = value; }
-        public static TimeSpan SinceLastUpdate { get => _sinceLastUpdate; set => _sinceLastUpdate = value; }
+        public double TotalGameTime { get => _totalGameTime.TotalMilliseconds; }
+        public double SinceLastUpdate { get => _sinceLastUpdate.TotalMilliseconds; }
 
-        static GameTime()
+        public GameTime()
         {
             _totalGameTime = new TimeSpan();
             _sinceLastUpdate = new TimeSpan();
@@ -22,7 +22,7 @@ namespace Physics
             _previousUpdateTime = DateTime.Now;
         }
 
-        public static void Update()
+        public void Update()
         {
             var now = DateTime.Now;
             _totalGameTime = now - _startTime;
