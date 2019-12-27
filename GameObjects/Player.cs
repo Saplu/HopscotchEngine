@@ -18,11 +18,11 @@ namespace GameObjects
         public Player()
         {
             _position = new Vector2(0, 0);
-            _hitbox = new OctagonHitbox(50, 50, _position);
+            _hitbox = new OctagonHitbox(50, 150, _position);
             _maxSpeed = 100;
-            _jumpSpeed = 300;
+            _jumpSpeed = -300;
             _gravity = new Gravity(0.5);
-            _currentSpeed = new Vector2(60, -80);
+            _currentSpeed = new Vector2(60, -300);
             _falling = true;
         }
 

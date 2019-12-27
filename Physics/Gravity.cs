@@ -13,7 +13,7 @@ namespace Physics
         public Gravity(double counterforce)
         {
             this._counterforce = ForceValid(counterforce);
-            _force = 100;
+            _force = 500;
             _maxSpeed = CalculateMaxSpeed(this._counterforce);
             _acceleration = CalculateAcceleration(this._counterforce);
         }

@@ -17,7 +17,7 @@ namespace GameObjects
         {
             _tiles = new Dictionary<int, Tile>();
             _player = new Player();
-            _player.Position = new Geometry.Vector2(100, 50);
+            _player.Position = new Geometry.Vector2(100, 150);
             CreateMap();
         }
 

@@ -17,7 +17,7 @@ namespace BulletTests
             map.AddOrUpdateTile(new Tile(100, 20, 1));
             map.AddOrUpdateTile(new Tile(3, 4));
 
-            Assert.AreEqual(2, map.Tiles.Count);
+            Assert.AreEqual(44, map.Tiles.Count); //42 tulee constructorista atm.
         }
     }
 }
