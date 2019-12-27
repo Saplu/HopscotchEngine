@@ -15,9 +15,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EngineCore", "EngineCore\EngineCore.csproj", "{543BEA82-6184-4FB2-A241-B483B0AD30F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameObjects", "GameObjects\GameObjects.csproj", "{AAADE9D6-F7EE-4955-B019-EB92E49BC1E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameObjects", "GameObjects\GameObjects.csproj", "{AAADE9D6-F7EE-4955-B019-EB92E49BC1E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Input", "Input\Input.csproj", "{78E9B1AC-3D7B-49B3-8DC3-57AD9A9E27BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Input", "Input\Input.csproj", "{78E9B1AC-3D7B-49B3-8DC3-57AD9A9E27BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77DD1924-7A27-4AE4-B1AD-B9BFB20562EC}"
+	ProjectSection(SolutionItems) = preProject
+		TestApp\bin\Debug\netcoreapp3.0\background.png = TestApp\bin\Debug\netcoreapp3.0\background.png
+		TestApp\bin\Debug\netcoreapp3.0\Player.png = TestApp\bin\Debug\netcoreapp3.0\Player.png
+		TestApp\bin\Debug\netcoreapp3.0\Untitled.png = TestApp\bin\Debug\netcoreapp3.0\Untitled.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
