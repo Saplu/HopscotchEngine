@@ -19,5 +19,28 @@ namespace BulletTests
 
             Assert.AreEqual(44, map.Tiles.Count); //42 tulee constructorista atm.
         }
+
+        [TestMethod]
+        public void HitboxesGeneratedCorrectly()
+        {
+            var map = new Map();
+
+            var result = false;
+
+            for (int i = 0; i < map.Hitboxes.Count; i++)
+            {
+                for (int j = 0; j < map.Hitboxes.Count; j++)
+                {
+                    if (i != j)
+                    {
+                        if (map.Hitboxes[j].Equals(map.Hitboxes[i]))
+                            result = true;
+                    }
+                }
+            }
+
+            Assert.AreEqual(false, result);
+            Assert.AreEqual(42, map.Hitboxes.Count);
+        }
     }
 }

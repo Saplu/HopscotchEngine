@@ -17,24 +17,35 @@ namespace GameObjects
         public Vector2 Position { get => _position; set => _position = value; }
         public Player()
         {
-            _position = new Vector2(0, 0);
-            _hitbox = new OctagonHitbox(50, 150, _position);
+            _position = new Vector2(50, 100);
+            _hitbox = new OctagonHitbox(32, 32, _position);
             _maxSpeed = 100;
             _jumpSpeed = -300;
             _gravity = new Gravity(0.5);
-            _currentSpeed = new Vector2(60, -300);
+            _currentSpeed = new Vector2(60, -140);
             _falling = true;
         }
 
-        public void Update(int milliseconds)
+        public void Update(int milliseconds, List<IHitbox> hitboxes)
         {
             _currentSpeed.Y = _gravity.Update(_currentSpeed.Y, _falling, milliseconds);
             
             _position.Update(_currentSpeed.X * milliseconds / 1000,
                 _currentSpeed.Y * milliseconds / 1000);
+            _hitbox.UpdatePosition(_position);
             //Nappulat jotka vaikuttavat liikkeeseen
             //Uusi nopeus
             //Uusi sijainti
+
+            foreach(var item in hitboxes)
+            {
+                if (_hitbox.Hit(item as IPolygonHitbox))
+                {
+                    _falling = false;
+                    _currentSpeed = new Vector2(0, 0);
+                }
+
+            }
             //Collision detection
             //Jälkimainingit
         }

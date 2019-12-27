@@ -52,6 +52,11 @@
             return Hit(checkpoint);
         }
 
+        public void UpdatePosition(Vector2 position)
+        {
+            _box.Position = position;
+        }
+
         private int CheckCorner(Vector2 point)
         {
             if (point.X >= _box.Position.X && point.Y <= _box.Position.Y)

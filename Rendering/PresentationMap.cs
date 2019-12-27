@@ -29,7 +29,7 @@ namespace Rendering
         public void Update(int milliseconds)
         {
             _map.Update(milliseconds);
-            _playerSprite.Position = new Vector2f((float)_map.Player.Position.X, (float)_map.Player.Position.Y);
+            _playerSprite.Position = new Vector2f((float)_map.Player.Position.X - 16, (float)_map.Player.Position.Y - 16);
         }
 
         public void Draw(RenderTarget target, RenderStates states)
