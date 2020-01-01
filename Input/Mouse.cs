@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Input
+namespace GameInput
 {
     public class Mouse
     {

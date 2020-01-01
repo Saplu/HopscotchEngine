@@ -55,10 +55,10 @@ namespace Geometry
             //    triangle.Corners[1].X += moveX;
             //    triangle.Corners[1].Y += moveY;
             //}
+            _position = value;
             CalculateCorners();
             SetMaxMinValues();
             CalculateVirtualCorners();
-            _position = value;
         }
 
         private int SetHeight(int value)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Geometry;
 using Geometry.Hitbox;
-using Geometry.Map;
+using GameObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BulletTests
