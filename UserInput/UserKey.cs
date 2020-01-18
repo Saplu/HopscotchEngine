@@ -10,23 +10,25 @@ namespace UserInput
     public class UserKey
     {
         private string _secondary, _primary;
+        int _heldDownMilliseconds;
+
         public string Primary { get => _primary; }
         public string Secondary { get => _secondary; }
-        public int HeldDownMilliseconds { get; set; }
+        public int HeldDownMilliseconds { get => _heldDownMilliseconds; }
         public bool WasUpdated { get; set; }
 
         public Key Key { get; }
 
         public UserKey(Key primary)
         {
-            HeldDownMilliseconds = 0;
+            _heldDownMilliseconds = 0;
             WasUpdated = true;
             SetValues(primary);
         }
 
         public void Update(int milliseconds)
         {
-            HeldDownMilliseconds += milliseconds;
+            _heldDownMilliseconds += milliseconds;
             WasUpdated = true; 
         }
 

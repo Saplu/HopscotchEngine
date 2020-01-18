@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace UserInput
 {
-    public class UserKeyBoard
+    public class UserKeyboard
     {
         private List<UserKey> _pressedKeys;
         private readonly List<Key> _alphabeticKeys, _specialKeys;
@@ -15,7 +15,7 @@ namespace UserInput
 
         public List<UserKey> PressedKeys { get => _pressedKeys; }
 
-        public UserKeyBoard()
+        public UserKeyboard()
         {
             _pressedKeys = new List<UserKey>();
             _secondary = false;
@@ -81,7 +81,8 @@ namespace UserInput
                 if (Keyboard.IsKeyDown(key))
                     AddOrUpdate(key, milliseconds);
             }
-            foreach(var spec in _specialKeys)
+
+            foreach (var spec in _specialKeys)
             {
                 if (Keyboard.IsKeyDown(spec))
                     AddOrUpdate(spec, milliseconds);
