@@ -30,19 +30,15 @@ namespace GameObjects
             _player.Update(milliseconds, _hitboxes);
         }
 
-        public void AddOrUpdateTile(Tile tile)
-        {
+        public void AddOrUpdateTile(Tile tile) =>
             Tiles[tile.Id] = tile;
-        }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return (IEnumerator)GetEnumerator();
         }
-        public TileEnum GetEnumerator()
-        {
-            return new TileEnum(_tiles);
-        }
+        public TileEnum GetEnumerator() =>
+            new TileEnum(_tiles);
 
         private void CreateMap()
         {

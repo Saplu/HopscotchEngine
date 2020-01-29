@@ -30,10 +30,8 @@ namespace GameObjects
             return (_position < _tiles.Count);
         }
 
-        public void Reset()
-        {
+        public void Reset() =>
             _position = -1;
-        }
 
         public Tile Current
         {
