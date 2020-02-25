@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Text;
 using Geometry;
 using Physics;
+using SFML.Window;
 
 namespace GameObjects
 {
@@ -28,6 +30,7 @@ namespace GameObjects
 
         public void Update(int milliseconds, List<IHitbox> hitboxes)
         {
+            GetMovementKeys();
             _currentSpeed.Y = _gravity.Update(_currentSpeed.Y, _falling, milliseconds);
             
             _position.Update(_currentSpeed.X * milliseconds / 1000,
@@ -48,6 +51,14 @@ namespace GameObjects
             }
             //Collision detection
             //Jälkimainingit
+        }
+
+        private void GetMovementKeys()
+        {
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
+                _currentSpeed.X = -_maxSpeed;
+            else if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
+                _currentSpeed.X = _maxSpeed;
         }
     }
 }
