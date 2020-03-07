@@ -33,10 +33,9 @@ namespace GameObjects
         public void AddOrUpdateTile(Tile tile) =>
             Tiles[tile.Id] = tile;
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return (IEnumerator)GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() =>
+            (IEnumerator)GetEnumerator();
+
         public TileEnum GetEnumerator() =>
             new TileEnum(_tiles);
 

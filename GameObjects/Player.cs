@@ -40,14 +40,17 @@ namespace GameObjects
             //Uusi nopeus
             //Uusi sijainti
 
+            _falling = true;
             foreach(var item in hitboxes)
             {
                 if (_hitbox.Hit(item as IPolygonHitbox))
                 {
-                    _falling = false;
-                    _currentSpeed = new Vector2(0, 0);
+                    var collisionResult = _hitbox.HandleCollision(item, _currentSpeed, milliseconds);
+                    this.Position = _hitbox.Position;
+                    _currentSpeed = collisionResult.Item1;
+                    if (collisionResult.Item2.Contains(4) || collisionResult.Item2.Contains(5))
+                        _falling = false;
                 }
-
             }
             //Collision detection
             //Jälkimainingit
@@ -59,6 +62,12 @@ namespace GameObjects
                 _currentSpeed.X = -_maxSpeed;
             else if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
                 _currentSpeed.X = _maxSpeed;
+            else _currentSpeed.X = 0;
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && _falling == false)
+            {
+                _currentSpeed.Y = _jumpSpeed;
+                _falling = true;
+            }
         }
     }
 }

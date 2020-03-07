@@ -9,6 +9,7 @@ namespace Geometry
         Rectangle _box;
 
         public IPolygon Box { get => _box; }
+        public Vector2 Position { get => _box.Position; }
 
         public RectangleHitbox(int height, int width, Vector2 position, int angle)
         {

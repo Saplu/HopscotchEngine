@@ -9,7 +9,7 @@ namespace Geometry
         Circle _box;
 
         public Circle Box { get => _box; }
-
+        public Vector2 Position { get => _box.Position; }
         public CircleHitbox(int radius, Vector2 position)
         {
             _box = new Circle(position, radius);

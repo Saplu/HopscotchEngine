@@ -9,6 +9,7 @@ namespace Geometry.Hitbox
         Triangle _box;
 
         public IPolygon Box { get => _box; }
+        public Vector2 Position { get => _box.Position; }
 
         public TriangleHitbox(Vector2 c1, Vector2 c2, Vector2 c3)
         {
