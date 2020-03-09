@@ -27,8 +27,6 @@ namespace Rendering
         {
             window.DispatchEvents();
 
-            //var texture = new Texture("Untitled.png"); Jostain syystä tää ei toiminu mulla, heitti exceptionia.
-            // Tein itelleni toimivalla tavalla tuonne ylöspäi^
             gameTime.Update();
             map.Update(Convert.ToInt32(gameTime.SinceLastUpdate));
 

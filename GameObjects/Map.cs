@@ -21,7 +21,6 @@ namespace GameObjects
         {
             _tiles = new Dictionary<int, Tile>();
             _player = new Player();
-            //_player.Position = new Geometry.Vector2(100, 150);
             CreateMap();
         }
 
@@ -41,7 +40,11 @@ namespace GameObjects
 
         private void CreateMap()
         {
-            for (int i = 340; i < 375; i++)
+            for (int i = 350; i < 375; i++)
+            {
+                AddOrUpdateTile(new Tile(1, i));
+            }
+            for (int i = 335; i < 340; i++)
             {
                 AddOrUpdateTile(new Tile(1, i));
             }
@@ -49,8 +52,21 @@ namespace GameObjects
             {
                 AddOrUpdateTile(new Tile(1, i));
             }
+            for (int i = 224; i < 229; i++)
+            {
+                AddOrUpdateTile(new Tile(1, i));
+            }
+            AddOrUpdateTile(new Tile(1, 198));
+            AddOrUpdateTile(new Tile(1, 154));
+            AddOrUpdateTile(new Tile(1, 120));
             AddOrUpdateTile(new Tile(1, 263));
             AddOrUpdateTile(new Tile(1, 253));
+            AddOrUpdateTile(new Tile(1, 300));
+            AddOrUpdateTile(new Tile(1, 325));
+            AddOrUpdateTile(new Tile(1, 318));
+            AddOrUpdateTile(new Tile(1, 45));
+            AddOrUpdateTile(new Tile(1, 110));
+            AddOrUpdateTile(new Tile(1, 140));
             GetHitboxes();
         }
 

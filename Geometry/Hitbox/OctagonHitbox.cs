@@ -60,19 +60,19 @@ namespace Geometry
             _box.Position = position;
         }
 
-        public (Vector2, List<int>) HandleCollision(IHitbox item, Vector2 speed, int milliseconds)
+        public (Vector2, int) HandleCollision(IHitbox item, Vector2 speed, int milliseconds, Vector2 original)
         {
-            List<int> collidingCorners = new List<int>();
+            var collidingCorner = 0;
             for (int i = 0; i < _box.Corners.Count; i++)
             {
                 if (item.Hit(_box.Corners[i]))
                 {
-                    collidingCorners.Add(i);
-                    ManagePosition(i, speed, item, milliseconds);
+                    collidingCorner = i;
+                    ManagePosition(i, original, item, milliseconds, speed.X);
                     speed = ManageSpeed(i, speed);
                 }
             }
-            return (speed, collidingCorners);
+            return (speed, collidingCorner);
         }
 
         private int CheckCorner(Vector2 point)
@@ -105,28 +105,17 @@ namespace Geometry
             else return true;
         }
 
-        private void ManagePosition(int corner, Vector2 speed, IHitbox item, int milliseconds)
+        private void ManagePosition(int corner, Vector2 original, IHitbox item, int milliseconds, double speedX)
         {
-            var newPos = new Vector2(0, 0);
-            if (speed.X != 0)
+            var dX = 0.1 * milliseconds;
+            switch(corner)
             {
-                if (corner == 3 || corner == 2)
-                    newPos.X = _box.Position.X - 1;
-                else if (corner == 6 || corner == 7)
-                    newPos.X = _box.Position.X + 1;
-                else newPos.X = _box.Position.X;
-            }
-            else newPos.X = _box.Position.X;
-            if (speed.Y != 0)
-            {
-                if (corner == 4 || corner == 5)
-                    newPos.Y = _box.Position.Y - 1;
-                else if (corner == 0 || corner == 1)
-                    newPos.Y = _box.Position.Y + 1;
-                else newPos.Y = _box.Position.Y;
-            }
-            else newPos.Y = _box.Position.Y;
-            _box.Position = newPos;
+                case 2: _box.Position = new Vector2(original.X - dX, original.Y); break;
+                case 3: _box.Position = new Vector2(original.X - dX, original.Y); break;
+                case 6: _box.Position = new Vector2(original.X + dX, original.Y); break;
+                case 7: _box.Position = new Vector2(original.X + dX, original.Y); break;
+                default: _box.Position = original; break;
+            }           
         }
 
         private Vector2 ManageSpeed(int corner, Vector2 speed)
@@ -138,6 +127,18 @@ namespace Geometry
                 speed.Y < 0 && (corner == 0 || corner == 1))
                 speed.Y = 0;
             return speed;
+        }
+
+        private Vector2 SeekCorrectPoint(Vector2 orig, IHitbox item, double dX, double dY)
+        {
+            var final = orig;
+            if (!item.Hit(final))
+            {
+                var halvedX = dX / 2;
+                var halvedY = dY / 2;
+                return SeekCorrectPoint(new Vector2(final.X + dX, final.Y + dY), item, halvedX, halvedY);
+            }
+            return final;
         }
     }
 }
