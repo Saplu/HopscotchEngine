@@ -35,6 +35,7 @@ namespace GameObjects
             var current = _position;
             _position.Update(_currentSpeed.X * milliseconds / 1000,
                 _currentSpeed.Y * milliseconds / 1000);
+            CheckBorders();
             _hitbox.UpdatePosition(_position);
 
             _falling = true;
@@ -63,6 +64,14 @@ namespace GameObjects
                 _currentSpeed.Y = _jumpSpeed;
                 _falling = true;
             }
+        }
+
+        private void CheckBorders()
+        {
+            if (_position.X < -2)
+                _position.X = 802;
+            if (_position.X > 802)
+                _position.X = -2;
         }
     }
 }

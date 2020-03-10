@@ -69,6 +69,7 @@ namespace Geometry
                 {
                     collidingCorner = i;
                     ManagePosition(i, original, item, milliseconds, speed.X);
+                    SoftBounce(_box.Corners[i], i, item);
                     speed = ManageSpeed(i, speed);
                 }
             }
@@ -129,16 +130,20 @@ namespace Geometry
             return speed;
         }
 
-        private Vector2 SeekCorrectPoint(Vector2 orig, IHitbox item, double dX, double dY)
+        private void SoftBounce(Vector2 original, int corner, IHitbox item)
         {
-            var final = orig;
-            if (!item.Hit(final))
+            var testPoint = new Vector2(original.X, original.Y - 1);
+            switch(corner)
             {
-                var halvedX = dX / 2;
-                var halvedY = dY / 2;
-                return SeekCorrectPoint(new Vector2(final.X + dX, final.Y + dY), item, halvedX, halvedY);
+                case 4:
+                case 5: if (item.Hit(testPoint))
+                        _box.Position.Y--;
+                    break;
+                default: testPoint = new Vector2(original.X, original.Y + 1);
+                    if (item.Hit(testPoint))
+                        _box.Position.Y++;
+                    break;
             }
-            return final;
         }
     }
 }

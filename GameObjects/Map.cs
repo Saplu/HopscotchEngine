@@ -63,6 +63,7 @@ namespace GameObjects
             AddOrUpdateTile(new Tile(1, 253));
             AddOrUpdateTile(new Tile(1, 300));
             AddOrUpdateTile(new Tile(1, 325));
+            AddOrUpdateTile(new Tile(1, 200));
             AddOrUpdateTile(new Tile(1, 318));
             AddOrUpdateTile(new Tile(1, 45));
             AddOrUpdateTile(new Tile(1, 110));
