@@ -38,12 +38,23 @@ namespace Rendering
             foreach(Tile tile in _map)
             {
                 var sprite = new Sprite(_tileTexture);
-                sprite.Rotation = (float)tile.Angle;
-                sprite.TextureRect = new IntRect(new Vector2i((int)tile.Position.X, (int)tile.Position.Y), new Vector2i(32, 32));
+                //sprite.Rotation = (float)tile.Angle;
+                sprite.TextureRect = SetIntRect((int)tile.Angle);
+                //new IntRect(new Vector2i((int)tile.Position.X, (int)tile.Position.Y), new Vector2i(32, 32));
                 sprite.Position = new Vector2f((float)tile.Position.X, (float)tile.Position.Y);
                 target.Draw(sprite);
             }
             target.Draw(_playerSprite);
+        }
+
+        private IntRect SetIntRect(int angle)
+        {
+            switch(angle)
+            {
+                case 135: return new IntRect(32, 0, 32, 32);
+                case 45: return new IntRect(64, 0, 32, 32);
+                default: return new IntRect(0, 0, 32, 32);
+            }
         }
     }
 }

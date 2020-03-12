@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GameObjects;
+using System.Linq;
 
 namespace BulletTests
 {
@@ -17,7 +18,7 @@ namespace BulletTests
             map.AddOrUpdateTile(new Tile(100, 20, 1));
             map.AddOrUpdateTile(new Tile(3, 4));
 
-            Assert.AreEqual(44, map.Tiles.Count); //42 tulee constructorista atm.
+            Assert.AreEqual(55, map.Tiles.Count); //53 tulee constructorista atm.
         }
 
         [TestMethod]
@@ -40,7 +41,7 @@ namespace BulletTests
             }
 
             Assert.AreEqual(false, result);
-            Assert.AreEqual(42, map.Hitboxes.Count);
+            Assert.AreEqual(53, map.Hitboxes.Count);
         }
     }
 }

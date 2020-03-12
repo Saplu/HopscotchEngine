@@ -60,7 +60,7 @@ namespace Geometry
             _box.Position = position;
         }
 
-        public (Vector2, int) HandleCollision(IHitbox item, Vector2 speed, int milliseconds, Vector2 original)
+        public (Vector2, int) HandleCollision(IPolygonHitbox item, Vector2 speed, int milliseconds, Vector2 original)
         {
             var collidingCorner = 0;
             for (int i = 0; i < _box.Corners.Count; i++)
@@ -108,6 +108,7 @@ namespace Geometry
 
         private void ManagePosition(int corner, Vector2 original, IHitbox item, int milliseconds, double speedX)
         {
+            
             var dX = 0.1 * milliseconds;
             switch(corner)
             {

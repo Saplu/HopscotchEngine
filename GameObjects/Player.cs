@@ -43,7 +43,7 @@ namespace GameObjects
             {
                 if (_hitbox.Hit(item as IPolygonHitbox))
                 {
-                    var collisionResult = _hitbox.HandleCollision(item, _currentSpeed, milliseconds, current);
+                    var collisionResult = _hitbox.HandleCollision(item as IPolygonHitbox, _currentSpeed, milliseconds, current);
                     this.Position = _hitbox.Position;
                     _currentSpeed = collisionResult.Item1;
                     if (collisionResult.Item2 == 4 || collisionResult.Item2 == 5)

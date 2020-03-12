@@ -68,6 +68,7 @@ namespace GameObjects
             AddOrUpdateTile(new Tile(1, 45));
             AddOrUpdateTile(new Tile(1, 110));
             AddOrUpdateTile(new Tile(1, 140));
+            AddOrUpdateTile(new Tile(1, 100));
             GetHitboxes();
         }
 

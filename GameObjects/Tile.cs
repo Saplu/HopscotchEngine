@@ -10,11 +10,11 @@ namespace GameObjects
     {
         int _width, _height, _id, _left, _right, _leftSide, _rightSide;
         List<Vector2> _corners;
-        List<IHitbox> _hitbox;
+        List<IPolygonHitbox> _hitbox;
         Vector2 _position, _leftVector, _rightVector;
         double _angle;
 
-        public List<IHitbox> Hitbox { get => _hitbox; }
+        public List<IPolygonHitbox> Hitbox { get => _hitbox; }
         public Vector2 Position { get => _position; set => _position = value; }
         public double Angle { get => _angle; set => _angle = value; }
         public int Id { get => _id; set => _id = value; }
@@ -44,7 +44,7 @@ namespace GameObjects
             _id = id;
             CalculatePosition();
             CalculateCorners();
-            _hitbox = new List<IHitbox>();
+            _hitbox = new List<IPolygonHitbox>();
             switch(premade)
             {
                 case 1: FullTile(); break;
@@ -92,7 +92,7 @@ namespace GameObjects
 
         private void CalculateHitboxes()
         {
-            _hitbox = new List<IHitbox>();
+            _hitbox = new List<IPolygonHitbox>();
             var corners = new List<Vector2>() { _rightVector, _leftVector };
             corners.AddRange(GetCornersBetween(_leftSide, _rightSide));
             for (int i = 2; i < corners.Count; i++)
